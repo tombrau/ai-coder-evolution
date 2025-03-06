@@ -7,8 +7,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.21.2/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
+    
+    <!-- If using compiled JavaScript version -->
+    <script src="app.js" defer></script>
+    
+    <!-- If using browser-based TypeScript compilation (alternative) -->
+    <!-- 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.5.5/typescript.min.js"></script>
+    <script type="text/typescript" src="app.tsx"></script>
+    <script>
+        window.onload = function() {
+            var scripts = document.getElementsByTagName('script');
+            for (var i = 0; i < scripts.length; i++) {
+                if (scripts[i].type === 'text/typescript') {
+                    var tsText = scripts[i].innerHTML;
+                    var jsText = ts.transpile(tsText, { jsx: ts.JsxEmit.React });
+                    eval(jsText);
+                }
+            }
+        };
+    </script>
+    -->
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -29,7 +49,5 @@
             </p>
         </footer>
     </div>
-
-    <script type="text/babel" src="app.js"></script>
 </body>
 </html>
