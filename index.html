@@ -5,30 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Coding Capability Projection (2019-2035)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/recharts/2.5.0/Recharts.min.js"></script>
-    
-    <!-- If using compiled JavaScript version -->
-    <script src="app.js" defer></script>
-    
-    <!-- If using browser-based TypeScript compilation (alternative) -->
-    <!-- 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/4.5.5/typescript.min.js"></script>
-    <script type="text/typescript" src="app.tsx"></script>
-    <script>
-        window.onload = function() {
-            var scripts = document.getElementsByTagName('script');
-            for (var i = 0; i < scripts.length; i++) {
-                if (scripts[i].type === 'text/typescript') {
-                    var tsText = scripts[i].innerHTML;
-                    var jsText = ts.transpile(tsText, { jsx: ts.JsxEmit.React });
-                    eval(jsText);
-                }
-            }
-        };
-    </script>
-    -->
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -45,9 +21,20 @@
             <p>Created to visualize the discussion between a human and Claude about the potential trajectory of AI coding capabilities.</p>
             <p class="mt-4">
                 <a href="conversation.html" class="text-blue-600 hover:underline">Read the full conversation</a> |
-                <a href="https://github.com/yourusername/ai-coding-projection" class="text-blue-600 hover:underline">View on GitHub</a>
+                <a href="https://github.com/yourusername/ai-coder-evolution" class="text-blue-600 hover:underline">View on GitHub</a>
             </p>
         </footer>
     </div>
+
+    <!-- Load React with PropTypes -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+    
+    <!-- Load Recharts after React and PropTypes -->
+    <script src="https://unpkg.com/recharts@2.5.0/umd/Recharts.js"></script>
+    
+    <!-- Load your app.js last -->
+    <script src="app.js"></script>
 </body>
 </html>
