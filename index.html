@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Coding Capability Projection (2019-2035)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
-    <!-- Add a default favicon to resolve 404 error -->
     <link rel="icon" href="data:,">
-    <!-- Remove Permissions-Policy header related to interest-cohort -->
-    <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto px-4 py-8">
@@ -30,15 +27,17 @@
         </footer>
     </div>
 
-    <!-- Load React with PropTypes -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.min.js"></script>
-    <script crossorigin src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
+    <!-- Load React -->
+    <script src="https://unpkg.com/react@18/umd/react.development.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- Load Recharts after React and PropTypes -->
-    <script crossorigin src="https://unpkg.com/recharts@2.5.0/umd/Recharts.js"></script>
+    <!-- Load PropTypes -->
+    <script src="https://unpkg.com/prop-types@15.8.1/prop-types.min.js"></script>
     
-    <!-- Load your app.js last -->
+    <!-- Load Recharts -->
+    <script src="https://unpkg.com/recharts@2.1.0/umd/Recharts.js"></script>
+    
+    <!-- Load app script -->
     <script src="app.js"></script>
 </body>
 </html>
