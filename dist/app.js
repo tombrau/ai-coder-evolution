@@ -1,4 +1,6 @@
+// Keep only one import at the top of your file:
 import * as React from 'react';
+import * as ReactDOMClient from 'react-dom/client';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Label, ReferenceLine } from 'recharts';
 // Define the historical timeline data (2019-2025)
 const historicalData = [
@@ -190,7 +192,6 @@ const AICodeTimeline = () => {
 // Change the last line of your app.tsx file from:
 // ReactDOM.render(<AICodeTimeline />, document.getElementById('root'));
 // To this:
-import * as ReactDOMClient from 'react-dom/client';
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 root.render(React.createElement(AICodeTimeline, null));
 //# sourceMappingURL=app.js.map
