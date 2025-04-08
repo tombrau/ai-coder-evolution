@@ -18,6 +18,6 @@
       "outDir": "./dist",
       "sourceMap": true
     },
-    "include": ["app.tsx"],
+    "include": ["app-org.tsx"],
     "exclude": ["node_modules"]
   }
