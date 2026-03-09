@@ -48,7 +48,7 @@ Mercury 2 is the first commercially available **diffusion-based reasoning LLM (d
 
 ## 🚀 Live Demo
 
-Hosted via GitHub Pages: **[https://yourusername.github.io/ai-coder-evolution/](https://yourusername.github.io/ai-coder-evolution/)**
+Hosted via GitHub Pages: **[https://tombrau.github.io/ai-coder-evolution/](https://tombrau.github.io/ai-coder-evolution/)**
 
 ---
 
