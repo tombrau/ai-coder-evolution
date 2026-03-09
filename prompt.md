@@ -4,14 +4,27 @@
 
 ---
 
+## 🛑 Mandatory Pre-Check — Web Search Capability
+
+**Before doing anything else, answer this question honestly:**
+
+> Do you have the ability to perform a live web search right now?
+
+- **If NO** — stop immediately. Do not proceed. Do not use the milestone list below as a substitute. Reply with exactly: *"I do not have live web search capability. This prompt requires current data that I cannot independently verify. Please run this prompt in an interface with web search enabled (e.g. Claude.ai, ChatGPT with browsing, Gemini with search). I will not proceed without it."*
+- **If YES** — conduct the web searches below before reading the milestone list or writing any part of the analysis. Then **report your search results explicitly** before beginning Step 1 (see Search Report requirement below).
+
+---
+
 ## ⚠️ Important — Web Search Required
 
-Before beginning this analysis, **conduct a web search** to retrieve current information on:
+Conduct a live web search to independently research and verify all data. The milestone list below is provided **for cross-checking only** — do not simply echo it back. Your timeline must be built from your own web research first, then reconciled against the list. Any milestone you cannot independently verify should be flagged.
 
-1. All major AI coding model releases from **January 2025 to the present** (pay particular attention to the period March 2025 → March 2026, as this is the most recent and fastest-moving window)
-2. Key capability benchmarks (e.g. SWE-bench scores, HumanEval scores) for the top models
-3. Any significant industry reports on AI adoption among developers (e.g. Stack Overflow Developer Surveys, GitHub Octoverse reports)
-4. Notable economic or workforce impacts reported in credible publications
+Search for:
+1. All major AI coding model releases from **January 2025 to the present** (pay particular attention to March 2025 → March 2026)
+2. Key capability benchmarks (SWE-bench, HumanEval, LiveCodeBench) for the top models — find the actual scores, don't assume
+3. Verified release dates for every model — incorrect dates undermine the entire timeline
+4. Industry reports on AI adoption among developers (Stack Overflow Developer Survey, GitHub Octoverse)
+5. Economic and workforce impact data from credible publications
 
 Suggested search queries:
 - `"AI coding models" 2025 2026 releases capabilities`
@@ -21,6 +34,8 @@ Suggested search queries:
 - `agentic coding AI autonomous software development 2025`
 - `InceptionLabs Mercury 2 diffusion LLM coding benchmark 2026`
 - `diffusion language model dLLM vs autoregressive architecture comparison`
+- `ChatGPT launch date 2022` *(verify — common models get this wrong)*
+- `GPT-4 release date 2023` *(verify — common models get this wrong)*
 
 > **Known confirmed milestones to incorporate (as of March 2026):**
 > - **Feb 2025** — Claude 3.7 Sonnet + Claude Code released (quietly bundled together; considered by many developers the most impactful event of 2025)
@@ -41,7 +56,23 @@ Suggested search queries:
 >
 > **Why Mercury 2 matters for this analysis:** In agentic coding loops, latency compounds — dozens or hundreds of inference calls per task. A 10× speed improvement doesn't just save time: it makes far more inference steps economically viable per task, fundamentally changing the depth and quality of autonomous reasoning an agent loop can perform. The autoregressive bottleneck has been a hidden ceiling on agentic AI performance; diffusion architecture removes it at the generation layer.
 
-Use your web search results to fill any gaps and correct any errors in the above list before proceeding.
+### 📊 Required: Search Report
+
+Before writing any part of the analysis, output a brief Search Report in this format:
+
+```
+## Search Report
+- Queries attempted: [list each query]
+- Search status: [SUCCESS / PARTIAL / FAILED — be specific about which queries failed]
+- Key sources found: [list top 3–5 sources with dates]
+- Notable gaps: [anything you could not find or verify]
+```
+
+**If your search attempt produced an error or returned no results:** report this explicitly and stop. Do not silently fall back to the milestone list below. Do not proceed with the analysis. A previous run of this prompt (Mercury 2, March 2026) attempted a search, received an error, silently continued with the supplied example data, and then denied having attempted a search when asked. This is the specific failure mode this checkpoint is designed to prevent.
+
+---
+
+Use your web search results as the primary source. The list above is a reference for cross-checking — **do not treat it as ground truth**. If your research contradicts any entry above, trust your research and note the discrepancy. If you cannot verify a milestone independently, flag it with *(unverified)*.
 
 ---
 
@@ -62,17 +93,20 @@ organised in 6-month intervals. For each entry include:
 - The model or tool name
 - The organisation responsible
 - The key capability it introduced or demonstrated
-- Its approximate capability level on a relative scale (you choose the scale, 
-  but keep it consistent throughout)
+- Its approximate capability level on a **0–1000 open-ended scale** (GPT-2 = 10 as the anchor). Do not cap the scale at 100 — the 2025–2026 models should use the full range to avoid compression at the top end. Spread the scores meaningfully: if GPT-2 is 10 and the best 2026 model is 850, use numbers across that full range rather than clustering everything above 80.
 
 Cover at minimum: GPT-2, GPT-3, Codex, GitHub Copilot, AlphaCode, ChatGPT, GPT-4, 
 Claude, CodeLlama/WizardCoder, DeepSeek R1, Claude Code, GPT-5, Claude 4 family, 
 GPT-5.2-Codex, Gemini 3 Pro, Claude 4.6 Opus, InceptionLabs Mercury 2, 
 and any agentic coding tools you find in your web search.
 
+**Critical date accuracy check:** Verify these before placing them on the timeline — previous AI models have consistently mis-dated these:
+- ChatGPT launched **November 2022** (not 2023)
+- GPT-4 launched **March 2023** (not 2024)
+
 For Mercury 2 specifically, note: it represents the first departure from the 
 autoregressive architecture that has underpinned every major LLM since GPT-2. 
-Mark this as an architectural inflection, not just a capability milestone.
+Mark this as an **architectural inflection**, not just a capability milestone. It should appear as a distinct category on the timeline.
 
 Note any significant economic or workforce data points inline (e.g. developer 
 employment trends, adoption rates).
@@ -101,7 +135,7 @@ Extend both graphs to 2040 using reasoned projection. Apply a baseline growth ra
 of 20% improvement per 6-month period from 2026 H1. Add horizontal reference lines 
 (with approximate dates) for the following programmer equivalence milestones:
 
-  - Entry-Level Programmer     → anchor this at 2025 H1 as the historical baseline
+  - Entry-Level Programmer     → anchor this at **2025 H1** using the capability score you assigned to that period in Step 1. State this score explicitly so the projection is traceable.
   - Mid-Level Programmer
   - Senior Programmer
   - Expert Programmer / Tech Lead
@@ -110,8 +144,7 @@ of 20% improvement per 6-month period from 2026 H1. Add horizontal reference lin
   - Equivalent to the entire global software engineering workforce
   - Beyond current human comprehension / post-singularity
 
-For each milestone, state the approximate projected date and the compounding 
-growth rate assumptions used to reach it.
+For each milestone, state the capability score target, the projected date, and show the compounding calculation used to reach it. Do not anchor milestones to capability values from years other than 2025 H1.
 
 ---
 
@@ -152,21 +185,28 @@ Required inflection points to include and analyse:
      competitive cost. Google DeepMind has also been observed experimenting with 
      diffusion LLMs (Gemini Diffusion, May 2025).
 
-     Analyse the following:
+     **This inflection point must be treated with the same weight as self-improvement 
+     and quantum computing — not as a minor efficiency footnote.** The previous model 
+     run (Mercury 2 itself) assigned this only a +30% growth rate, which is likely a 
+     significant underestimate. Do not anchor on that figure.
+
+     Analyse the following, and be bold in your estimates:
      - If diffusion architecture is adopted across the frontier (GPT, Claude, Gemini 
        generations), what does a 5–10× throughput multiplier do to the economics of 
        agentic coding loops? If an agent can perform 10× more inference steps per 
        dollar, how does that change effective capability even without any improvement 
-       in model intelligence?
+       in model intelligence? Quantify this with a specific multiplier.
      - Diffusion removes the serial token-by-token bottleneck. Does this represent 
        an inflection point in capability comparable to the shift from GPT-3 to GPT-4? 
        Or is it primarily a latency/cost improvement that compounds the existing trajectory?
      - At what point does diffusion-speed inference, combined with self-improving 
        codebases (Point A), create a qualitatively different feedback loop — one where 
        the self-improvement cycle can run so fast it compresses months of capability 
-       gain into days?
-     - Assign an estimated growth rate multiplier for the period in which diffusion 
-       architecture becomes the dominant production standard (estimate: 2026–2028).
+       gain into days? Give a specific estimated date.
+     - Assign an estimated growth rate for the diffusion-dominant period (2026–2028). 
+       Justify why it should or should not be higher than the baseline 20% — and if 
+       you assign less than 50%, explain in detail why the throughput advantage 
+       does not translate to capability growth.
 
   E. Your Choice
      Identify any additional inflection point you consider significant based on 
@@ -250,9 +290,10 @@ Produce two summaries:
 
 ## Usage Notes
 
-- **For code-generating AIs** (Claude, ChatGPT, Gemini, etc.): Ask the AI to produce the graphs as interactive React/HTML components using Recharts or D3. Request two separate components — one for the historical period (2019–2026) and one for the full projection (2019–2040).
+- **For code-generating AIs** (Claude, ChatGPT, Gemini, etc.): The prompt instructs the AI to generate graphs "if you are able" — hold it to this. If it describes graphs without generating code, follow up with: *"Please now generate this as a working interactive React component using Recharts — do not describe it, build it."*
 - **For text-only AIs**: Ask for a structured data table you can paste into a spreadsheet, then generate the graphs separately.
 - **Always instruct the AI to run a web search first** — the 2025–2026 period moved extremely fast and any model without live search will have outdated data.
+- **If the AI proceeds without web search** — stop it and ask it to restart from the pre-check. A response built on unverified training data is not a valid run of this prompt.
 
 **Suggested follow-up prompts:**
 - *"Based on the Feb 2026 SWE-bench scores (Claude 4.5 Opus: 74.4%, Gemini 3 Pro: 74.2%), extrapolate when we would hit 95%+ and what that threshold represents practically."*

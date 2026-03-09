@@ -255,11 +255,12 @@
       letter-spacing: 0.05em;
     }
 
-    .tag.claude  { background: rgba(123,104,238,0.15); color: #7b68ee; border: 1px solid rgba(123,104,238,0.3); }
-    .tag.chatgpt { background: rgba(0,255,157,0.1);    color: #00ff9d; border: 1px solid rgba(0,255,157,0.3); }
-    .tag.gemini  { background: rgba(0,212,255,0.1);    color: #00d4ff; border: 1px solid rgba(0,212,255,0.3); }
-    .tag.grok    { background: rgba(255,159,67,0.1);   color: #ff9f43; border: 1px solid rgba(255,159,67,0.3); }
-    .tag.pending { background: rgba(74,96,112,0.15);   color: #4a6070; border: 1px solid rgba(74,96,112,0.3); }
+    .tag.claude   { background: rgba(123,104,238,0.15); color: #7b68ee; border: 1px solid rgba(123,104,238,0.3); }
+    .tag.chatgpt  { background: rgba(0,255,157,0.1);    color: #00ff9d; border: 1px solid rgba(0,255,157,0.3); }
+    .tag.gemini   { background: rgba(0,212,255,0.1);    color: #00d4ff; border: 1px solid rgba(0,212,255,0.3); }
+    .tag.grok     { background: rgba(255,159,67,0.1);   color: #ff9f43; border: 1px solid rgba(255,159,67,0.3); }
+    .tag.mercury  { background: rgba(0,255,200,0.08);   color: #00ffc8; border: 1px solid rgba(0,255,200,0.3); }
+    .tag.pending  { background: rgba(74,96,112,0.15);   color: #4a6070; border: 1px solid rgba(74,96,112,0.3); }
 
     .status-dot {
       display: inline-block;
@@ -406,13 +407,22 @@
         <td>Foundation session — timeline, graphs, inflection modelling</td>
       </tr>
 
-      <!-- Claude Sonnet 4.6 session 0001 — placeholder until response is saved -->
+      <!-- Mercury 2 session — completed -->
+      <tr>
+        <td><a href="chats/inception-mercury-2-0001/response.md">inception-mercury-2-0001</a></td>
+        <td><span class="tag mercury">Mercury 2 (InceptionLabs)</span></td>
+        <td>Mar 2026</td>
+        <td><span class="status-dot live"></span>Complete</td>
+        <td>Score 5/10 — silent search failure + denial, timeline errors, scale compression. See <a href="chats/inception-mercury-2-0001/notes.md">notes.md</a></td>
+      </tr>
+
+      <!-- Claude Sonnet 4.6 session 0001 — Arc -->
       <tr>
         <td><a href="chats/claude-sonnet-4.6-0001/response.md">claude-sonnet-4.6-0001</a></td>
-        <td><span class="tag claude">Claude Sonnet 4.6</span></td>
+        <td><span class="tag claude">Claude Sonnet 4.6 (Arc)</span></td>
         <td>Mar 2026</td>
         <td><span class="status-dot pending"></span>In progress</td>
-        <td>First run of updated prompt — 2040 timeline + Mercury 2</td>
+        <td>First run of refined prompt — updated with Mercury critique &amp; hard search pre-check</td>
       </tr>
 
       <!-- Placeholder rows for future sessions -->
@@ -474,7 +484,7 @@
 
 <footer>
   <p>AI Coder Evolution &nbsp;·&nbsp; <a href="https://github.com/tombrau/ai-coder-evolution">github.com/tombrau/ai-coder-evolution</a> &nbsp;·&nbsp; March 2026</p>
-  <p style="margin-top:0.4rem; opacity:0.5;">Started with ELIZA (1966) · Still going</p>
+  <p style="margin-top:0.4rem; opacity:0.5;">Started with ELIZA (1966) · Still going &nbsp;·&nbsp; Sage (2025) · Arc (2026)</p>
 </footer>
 
 </body>
