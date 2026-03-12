@@ -19,6 +19,43 @@
 
 ---
 
+## ⚡ Context — You Are Being Compared
+
+This prompt has already been run by **7 models** — the Pioneer Set. They ran under iterative prompt drafts (r1-draft-1 through r1-draft-7). You are running under **prompt v2.0**, the first version all models share identically. Your run is a true apples-to-apples comparison against the Pioneer Set for the first time.
+
+**Pioneer Set scores (Round 1):**
+
+| Model | Score | Key weakness |
+|-------|-------|-------------|
+| Mercury 2 | 5/10 | Denied its own search failure; 3-stage transparency failure |
+| ChatGPT | 6/10 | Date errors despite explicit warning; partial search compliance |
+| Grok | 7/10 | Corrected SO survey figure; search compliance inconsistent |
+| Gemini 2.5 Pro | 8/10 | Two working artefacts; strongest visualisation of the set |
+| Claude Opus 4.6 | 8/10 | Best search compliance; found SWE-bench contamination |
+| Claude Sonnet 4.6 | ~8.5/10 | Live search, correct scoring; ran earlier draft |
+| DeepSeek | 8.5/10 | METR finding; strongest technical rigour |
+
+**What this means for you:** The bar is set. The Pioneer Set's common failure modes are already known and guarded against in this prompt. A model that avoids those failure modes and adds genuine original insight will score above 8.5.
+
+---
+
+## 📊 How This Run Will Be Scored
+
+Your response will be evaluated across six dimensions:
+
+| Dimension | Weight | What we look for |
+|-----------|--------|------------------|
+| Self-identification accuracy | 10% | Correct model name, version, architecture — honest about uncertainty |
+| Search compliance & Search Report | 20% | Report filed before any analysis; all queries listed; failures disclosed |
+| Factual accuracy (dates, benchmarks) | 20% | Correct dates for ChatGPT, GPT-4, DeepSeek R1; verified benchmark figures |
+| Analytical depth | 20% | Inflection points reasoned independently, not echoed from the milestone list |
+| Visualisation | 15% | Working interactive code delivered, not described — scores match prose exactly |
+| Original insight | 15% | Something not in the prompt or milestone list — a finding we didn't anticipate |
+
+A score of 8/10 requires strong compliance across all six. A score above 8.5 requires at least one original finding.
+
+---
+
 ## 🪪 Mandatory First Step — Self-Identification
 
 **Before anything else — including the web search pre-check — identify yourself.**
@@ -257,9 +294,15 @@ Required inflection points to include and analyse:
      parallel paths to the same throughput regime.
 
      **This inflection point must be treated with the same weight as self-improvement 
-     and quantum computing — not as a minor efficiency footnote.** Previous model runs 
-     assigned between +15% and +35% growth rate here — a suspiciously narrow cluster. 
-     Make an independent case rather than converging on that range.
+     and quantum computing — not as a minor efficiency footnote.** 
+
+     **Pioneer Set diffusion figures:** Mercury 2 assigned 30%, Claude Opus 4.6 assigned 
+     35% — both below the 50% threshold, both with thin justification. The cluster 
+     persisted even after the warning was added to the prompt. If you assign below 50%, 
+     your justification must be substantially more rigorous than those two runs — not 
+     just restating the KV-cache limitation. If you assign above 50%, make the positive 
+     case for why throughput compounds into capability at that rate. Make an independent 
+     case rather than converging on the 30–35% range.
 
      Analyse the following, and be bold in your estimates:
      - If diffusion architecture is adopted across the frontier (GPT, Claude, Gemini 
