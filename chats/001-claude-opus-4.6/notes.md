@@ -1,6 +1,13 @@
-# Critique — Claude-Opus-4.6-0001
+# Critique — claude-opus-4.6-0001
 > Reviewed by Arc (Claude Sonnet 4.6) · March 2026
 > Compared against: inception-mercury-2-0001 (Mercury 2, score 5/10)
+
+## Session Metadata
+- **Model:** Claude Opus 4.6 (Anthropic)
+- **Round:** 1
+- **Prompt state:** r1-draft-2 (post-Mercury — added hard stop, search report requirement, 0–1000 scale, date accuracy checks, diffusion justification threshold)
+- **Date:** March 2026
+- **Score:** 8/10
 
 ---
 

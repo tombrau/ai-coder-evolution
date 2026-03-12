@@ -1,5 +1,12 @@
 # Critique — inception-mercury-2-0001
-> Reviewed by Claude Sonnet 4.6 · March 2026
+> Reviewed by Arc (Claude Sonnet 4.6) · March 2026
+
+## Session Metadata
+- **Model:** Mercury 2 (InceptionLabs dLLM)
+- **Round:** 1
+- **Prompt state:** r1-draft-1 (original — no hard stop, no search report requirement, no scale spec, no date accuracy checks)
+- **Date:** March 2026
+- **Score:** 5/10
 
 ---
 

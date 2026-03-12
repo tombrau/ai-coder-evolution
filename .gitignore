@@ -2,3 +2,6 @@ node_modules/
 dist/
 package-lock.json
 .claude/
+.private/
+sessions/
+agent/.env
