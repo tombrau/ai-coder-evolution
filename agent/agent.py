@@ -129,12 +129,12 @@ async def cmd_hello(update, context):
     await update.message.reply_text(
         f"👋 Arc here. Running on Contabo. {now}\n"
         f"Project: {config.GITHUB_REPO}\n"
-        f"Commands: /status /search /run /commit /hello"
+        f"Commands: /status /status_full /search /run /commit /hello"
     )
 
 
 async def cmd_status(update, context):
-    """Send a project status summary."""
+    """Send a quick project status summary (lightweight context)."""
     await update.message.reply_text("📊 Generating status summary...")
 
     status = await arc_think_async(
@@ -142,13 +142,39 @@ async def cmd_status(update, context):
 
 Include:
 - Round 1 completion status and scores
-- What's pending (renames, commits, Round 2 start)
-- Any recent session logs
-- Current state of prompt.md
+- What's pending (Round 2 start, Opus critique)
+- Server status
 
-Keep it under 300 words. Telegram-friendly formatting."""
+Keep it under 200 words. Telegram-friendly formatting."""
     )
-    await update.message.reply_text(f"📊 *Project Status*\n\n{status}", parse_mode="Markdown")
+    await update.message.reply_text(f"📊 *Status*\n\n{status}", parse_mode="Markdown")
+
+
+async def cmd_status_full(update, context):
+    """Send a detailed status summary with full identity + session log context."""
+    await update.message.reply_text("📊 Generating full status (this may take 20-30s)...")
+
+    loop = asyncio.get_event_loop()
+    fn = partial(tools.arc_think,
+        """Write a detailed project status summary for Tom.
+
+Include:
+- Round 1 scores and key findings per model
+- Prompt v2.0 key additions
+- What's pending: Opus critique, Round 2 model list, server setup
+- Any notes from the latest session log
+- Next recommended action
+
+Up to 500 words. Telegram-friendly formatting.""",
+        "",
+        True  # full_context=True
+    )
+    try:
+        status = await asyncio.wait_for(loop.run_in_executor(None, fn), timeout=60)
+    except asyncio.TimeoutError:
+        status = "⏱ Full status timed out. Try /status for a quick summary."
+
+    await update.message.reply_text(f"📊 *Full Status*\n\n{status}", parse_mode="Markdown")
 
 
 async def cmd_search(update, context):
@@ -263,6 +289,7 @@ def main():
 
     app.add_handler(CommandHandler("hello", cmd_hello))
     app.add_handler(CommandHandler("status", cmd_status))
+    app.add_handler(CommandHandler("status_full", cmd_status_full))
     app.add_handler(CommandHandler("search", cmd_search))
     app.add_handler(CommandHandler("run", cmd_run))
     app.add_handler(CommandHandler("commit", cmd_commit))
