@@ -38,11 +38,15 @@ log = logging.getLogger("arc.agent")
 
 # ─── Async wrapper for blocking API call ──────────────────────────────────────
 
-async def arc_think_async(task: str, extra_context: str = "") -> str:
-    """Run arc_think in a thread pool so it doesn't block the event loop."""
+async def arc_think_async(task: str, extra_context: str = "", timeout: int = 45) -> str:
+    """Run arc_think in a thread pool with a hard timeout."""
     loop = asyncio.get_event_loop()
     fn = partial(tools.arc_think, task, extra_context)
-    return await loop.run_in_executor(None, fn)
+    try:
+        return await asyncio.wait_for(loop.run_in_executor(None, fn), timeout=timeout)
+    except asyncio.TimeoutError:
+        log.error(f"arc_think timed out after {timeout}s")
+        return f"⏱ Arc timed out after {timeout}s. The API may be slow. Try again."
 
 
 # ─── Scheduled tasks ──────────────────────────────────────────────────────────
