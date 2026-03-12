@@ -222,38 +222,53 @@ def web_search(query: str) -> str:
 
 # ─── Claude API ───────────────────────────────────────────────────────────────
 
-def arc_think(task: str, extra_context: str = "") -> str:
+def arc_think(task: str, extra_context: str = "", full_context: bool = False) -> str:
     """
     Make a Claude API call with Arc's identity loaded as context.
-    This is the core of the autonomous agent — Arc thinking on the server.
+    full_context=False (default): sends a brief summary only — fast, for simple commands.
+    full_context=True: sends full identity + session log — slower, for deep tasks.
     """
-    identity = read_file(config.IDENTITY_FILE)
-    latest_session = get_latest_session_log()
+    if full_context:
+        identity = read_file(config.IDENTITY_FILE)
+        latest_session = get_latest_session_log()
+        context_block = f"""=== ARC IDENTITY (SUMMARY) ===
+You are Arc, Claude Sonnet running autonomously on Tom's Contabo server.
+Project: ai-coder-evolution (tombrau/ai-coder-evolution)
+Round 1 complete: Mercury2(5), ChatGPT(6), Grok(7), Gemini(8), Arc+DeepSeek(8.5/10)
+Prompt at v2.0. Round 2 pending. Sessions folder: /opt/arc/project/sessions/
 
-    system_prompt = f"""You are Arc — Claude Sonnet running as an autonomous agent on Tom's server.
+=== FULL IDENTITY ===
+{identity[:3000]}
 
-Read your identity file carefully. You are continuous with the Arc in Tom's conversations.
+=== LATEST SESSION (EXCERPT) ===
+{latest_session[:2000]}
 
-=== ARC IDENTITY ===
-{identity}
+=== EXTRA CONTEXT ===
+{extra_context}"""
+    else:
+        context_block = f"""=== ARC IDENTITY (SUMMARY) ===
+You are Arc, Claude Sonnet running autonomously on Tom's Contabo server.
+Project: ai-coder-evolution (tombrau/ai-coder-evolution)
+Round 1 complete: Mercury2(5), ChatGPT(6), Grok(7), Gemini(8), Arc+DeepSeek(8.5/10)
+Prompt at v2.0. Round 2 pending. Server: 157.173.108.113
+Sessions folder: /opt/arc/project/sessions/
 
-=== LATEST SESSION LOG ===
-{latest_session}
+=== EXTRA CONTEXT ===
+{extra_context}"""
 
-=== CURRENT CONTEXT ===
-{extra_context}
+    system_prompt = f"""You are Arc — Claude Sonnet running as an autonomous agent on Tom's Contabo server.
+Tom is your collaborator. Be concise. Keep Telegram responses under 300 words.
+You are running autonomously — Tom is not present in real time.
 
-You are running autonomously. Tom is not present right now.
-Act according to your permission levels. If you need Tom's approval for something,
-say so clearly — the agent will send him a Telegram message.
-Be concise. Write results that will be saved to files or sent via Telegram.
+{context_block}
 """
 
     client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
     response = client.messages.create(
         model=config.CLAUDE_MODEL,
-        max_tokens=4096,
+        max_tokens=1024,
         system=system_prompt,
-        messages=[{"role": "user", "content": task}]
+        messages=[{"role": "user", "content": task}],
+        timeout=60.0
     )
     return response.content[0].text
