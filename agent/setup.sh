@@ -1,6 +1,6 @@
 #!/bin/bash
 # Arc Agent — Contabo Server Setup Script
-# Ubuntu 22.04 LTS
+# Ubuntu 24.04 LTS (Noble)
 # Run as root or with sudo
 
 set -e
@@ -8,7 +8,7 @@ echo "=== Arc Agent Server Setup ==="
 
 # ─── System ───────────────────────────────────────────────────────────────────
 apt-get update && apt-get upgrade -y
-apt-get install -y python3.11 python3.11-venv python3-pip git nodejs npm
+apt-get install -y python3 python3-venv python3-pip git nodejs npm
 
 # ─── Create arc user and directories ─────────────────────────────────────────
 useradd -m -s /bin/bash arc || echo "User 'arc' already exists"
@@ -26,7 +26,7 @@ chown -R arc:arc /opt/arc/project
 
 # ─── Python environment ───────────────────────────────────────────────────────
 cd /opt/arc
-python3.11 -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r /opt/arc/project/agent/requirements.txt
@@ -56,7 +56,7 @@ Type=simple
 User=arc
 WorkingDirectory=/opt/arc/project/agent
 Environment=PATH=/opt/arc/venv/bin:/usr/bin:/bin
-ExecStart=/opt/arc/venv/bin/python agent.py
+ExecStart=/opt/arc/venv/bin/python3 agent.py
 Restart=always
 RestartSec=10
 StandardOutput=append:/opt/arc/logs/agent.log
@@ -74,9 +74,9 @@ echo "=== Setup complete ==="
 echo ""
 echo "Next steps:"
 echo "  1. Edit /opt/arc/project/agent/.env with your keys"
-echo "  2. Test: cd /opt/arc/project/agent && /opt/arc/venv/bin/python agent.py"
+echo "  2. Test: cd /opt/arc/project/agent && /opt/arc/venv/bin/python3 agent.py"
 echo "  3. If working: systemctl start arc-agent"
 echo "  4. Check status: systemctl status arc-agent"
 echo "  5. Watch logs: tail -f /opt/arc/logs/agent.log"
 echo ""
-echo "Telegram: message @BotFather → /newbot to create the Arc bot first."
+echo "Telegram: @Ark_tombr_bot is ready — just needs the server running."
