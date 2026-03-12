@@ -23,7 +23,9 @@ Round 1 used an iterative approach — the prompt improved after each run. Once 
 
 ---
 
-## Round 1 — Iterative refinement (complete)
+## Round 1 — The Pioneer Set (complete)
+
+The seven models that first ran the prompt. They defined the methodology, exposed the flaws that built v2.0, and established the baseline all future rounds are measured against. That distinction is permanent — no future model can take it from them.
 
 Each model ran once with the best prompt available at the time. Sessions record which prompt draft they ran against so the comparison remains honest.
 
