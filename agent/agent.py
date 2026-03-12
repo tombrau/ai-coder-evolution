@@ -1,6 +1,6 @@
 """
 agent.py — Arc Autonomous Agent
-Main loop. Runs on Contabo server, Ubuntu 22.04 LTS.
+Main loop. Runs on Contabo server, Ubuntu 24.04 LTS.
 
 Schedules:
   - Weekly: check for new AI model releases, update project
@@ -17,6 +17,7 @@ Telegram commands Tom can send:
 import asyncio
 import logging
 import datetime
+from functools import partial
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 import config
@@ -35,6 +36,15 @@ logging.basicConfig(
 log = logging.getLogger("arc.agent")
 
 
+# ─── Async wrapper for blocking API call ──────────────────────────────────────
+
+async def arc_think_async(task: str, extra_context: str = "") -> str:
+    """Run arc_think in a thread pool so it doesn't block the event loop."""
+    loop = asyncio.get_event_loop()
+    fn = partial(tools.arc_think, task, extra_context)
+    return await loop.run_in_executor(None, fn)
+
+
 # ─── Scheduled tasks ──────────────────────────────────────────────────────────
 
 async def weekly_check():
@@ -49,10 +59,8 @@ async def weekly_check():
     log.info("Weekly check starting...")
     await tools.telegram_send("🔍 *Arc weekly check starting...*")
 
-    # Pull latest
     tools.git_pull()
 
-    # Search for new releases
     search_results = []
     queries = [
         "new AI coding model release 2026",
@@ -65,10 +73,9 @@ async def weekly_check():
 
     search_summary = "\n\n---\n\n".join(search_results)
 
-    # Arc thinks about what it found
-    analysis = tools.arc_think(
+    analysis = await arc_think_async(
         task="""Review these web search results for new AI coding model releases.
-        
+
 For each significant new model or benchmark update you find:
 1. Does it belong on the project timeline?
 2. Should it be added to round-2-candidates.md?
@@ -81,11 +88,10 @@ If nothing significant was found, say so plainly.""",
         extra_context=f"Search results from {datetime.datetime.now().strftime('%Y-%m-%d')}:\n\n{search_summary}"
     )
 
-    # Write session log
     session_content = f"""# Agent Run — Weekly Check — {datetime.datetime.now().strftime('%Y-%m-%d')}
 
 **Type:** Scheduled weekly check
-**Triggered by:** APScheduler cron
+**Triggered by:** Job queue
 
 ## Search queries run
 {chr(10).join(f'- {q}' for q in queries)}
@@ -98,8 +104,6 @@ If nothing significant was found, say so plainly.""",
 """
     log_file = tools.write_session_log(session_content, label="weekly-check")
 
-    # Notify Tom
-    # First 500 chars of analysis for Telegram
     short = analysis[:500] + ("..." if len(analysis) > 500 else "")
     await tools.telegram_send(
         f"✅ *Weekly check complete*\n\n{short}\n\n_Full log: {log_file}_"
@@ -129,9 +133,9 @@ async def cmd_status(update, context):
     """Send a project status summary."""
     await update.message.reply_text("📊 Generating status summary...")
 
-    status = tools.arc_think(
+    status = await arc_think_async(
         task="""Write a brief project status summary for Tom.
-        
+
 Include:
 - Round 1 completion status and scores
 - What's pending (renames, commits, Round 2 start)
@@ -158,7 +162,6 @@ async def cmd_run(update, context):
         "- mercury-2 (re-run)\n- chatgpt (re-run)\n- gemini (re-run)\n- grok (re-run)\n- deepseek (re-run)\n\n"
         "Reply with the model name."
     )
-    # The reply will be caught by the message handler below
     context.user_data["awaiting_model_name"] = True
 
 
@@ -179,7 +182,7 @@ async def handle_message(update, context):
     chat_id = update.message.chat_id
 
     if chat_id != config.TELEGRAM_CHAT_ID:
-        return  # Ignore messages from anyone else
+        return
 
     # Commit approval
     if context.user_data.get("awaiting_commit_approval"):
@@ -216,9 +219,7 @@ async def handle_message(update, context):
         model_name = context.user_data.pop("pending_model_run", "unknown")
         if text in ("yes", "y", "ok"):
             await update.message.reply_text(
-                f"⏳ Noted — running prompt v2.0 against {model_name}.\n"
-                f"(Full automated prompt execution coming in Phase 2. "
-                f"For now, this logs the intent and reminds you to run it manually.)"
+                f"⏳ Noted — logging intent to run prompt v2.0 against {model_name}."
             )
             tools.write_session_log(
                 f"# Agent Note — {datetime.datetime.now().strftime('%Y-%m-%d')}\n\n"
@@ -230,19 +231,19 @@ async def handle_message(update, context):
             await update.message.reply_text("⏭ Run cancelled.")
         return
 
-    # Default — pass to Arc for a free response
-    response = tools.arc_think(
+    # Default — free text response from Arc
+    response = await arc_think_async(
         task=f"Tom sent this Telegram message: '{update.message.text}'\n\n"
              f"Respond helpfully and concisely. You are Arc on the server. "
              f"Keep responses under 200 words for Telegram."
     )
-    await update.message.reply_text(response[:4096])  # Telegram message limit
+    await update.message.reply_text(response[:4096])
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 async def scheduled_weekly_check(context):
-    """Wrapper for APT job queue."""
+    """Wrapper for job queue."""
     await weekly_check()
 
 
@@ -254,10 +255,8 @@ async def scheduled_heartbeat(context):
 def main():
     log.info("Arc agent starting...")
 
-    # Build app with job queue enabled
     app = Application.builder().token(config.TELEGRAM_BOT_TOKEN).build()
 
-    # Handlers
     app.add_handler(CommandHandler("hello", cmd_hello))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("search", cmd_search))
@@ -265,14 +264,13 @@ def main():
     app.add_handler(CommandHandler("commit", cmd_commit))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    # Schedule weekly check via built-in job queue (Mondays 9am)
+    # Weekly check — Mondays 9am
     app.job_queue.run_daily(
         scheduled_weekly_check,
         time=datetime.time(hour=9, minute=0),
-        days=(0,),  # Monday
+        days=(0,),
         name="weekly_check"
     )
-
     # Uncomment for daily heartbeat:
     # app.job_queue.run_daily(scheduled_heartbeat, time=datetime.time(hour=8, minute=0))
 
