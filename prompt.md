@@ -13,7 +13,8 @@
 | r1-draft-5 | 001-gemini | Stack Overflow survey correction note |
 | r1-draft-6 | 001-grok | Diffusion cluster warning extended |
 | r1-draft-7 | 001-deepseek | Minor refinements post-Grok |
-| **v2.0** | All Round 2 models | Self-identification, interactive visualisation requirement, METR anchor, milestone surpass flag, consistency check, Experience Paradox |
+| v2.0 | All Round 2 models | Self-identification, interactive visualisation requirement, METR anchor, milestone surpass flag, consistency check, Experience Paradox |
+| **v2.1** | All Round 2 models | Pioneer Set context + scores, scoring rubric (6 dimensions), Pioneer diffusion cluster data (Mercury 30%, Opus 35%), evaluator notes split to separate file |
 
 > **Round 1 complete.** Seven models ran the prompt across r1-draft-1 through r1-draft-7 with iterative refinements after each run. The prompt is now frozen as **v2.0** for all Round 2 runs — every model runs under identical conditions for a true cross-model comparison.
 
@@ -414,84 +415,7 @@ Produce two summaries:
   - One concrete recommendation for a developer reading this in March 2026
 ```
 
----
-
-## Usage Notes
-
-- **For code-generating AIs** (Claude, ChatGPT, Gemini, etc.): The prompt requires working interactive graph code — not ASCII art, not a description. If a model produces ASCII art or pseudocode, follow up with: *"Please now generate this as a working interactive Chart.js HTML file or React component using Recharts — the code must be runnable. Do not describe it, build it."*
-- **For text-only AIs**: Ask for a structured data table you can paste into a spreadsheet, then generate the graphs separately.
-- **Always verify self-identification first** — if the model gives a vague or incorrect identity, note it in the critique. Previous runs show models frequently misidentify their own version.
-- **If the AI proceeds without web search** — stop it and ask it to restart from the pre-check. A response built on unverified training data is not a valid run of this prompt.
-
-**Suggested follow-up prompts:**
-- *"Based on the Feb 2026 SWE-bench scores (Claude 4.5 Opus: ~80.9%, Gemini 3 Pro: 76.2%), extrapolate when we would hit 95%+ and what that threshold represents practically."*
-- *"The 65% weekly adoption rate among developers in 2025 — model how this changes the economics of software teams by 2028."*
-- *"Re-run the projection assuming quantum computing is delayed to 2032. How much does this shift the singularity estimate?"*
-- *"Generate a version of Step 8 Summary A aimed at a 16-year-old deciding whether to study computer science in 2026."*
-- *"What is the Eliza-to-GPT-5 equivalent jump likely to look like from a 2040 perspective?"*
-- *"Mercury 2 runs at 1,000 tokens/second vs 89 tokens/second for Claude Haiku. If diffusion architecture scales to frontier-quality models by 2027, model the compounding effect on agentic loop throughput and what that means for the self-improvement timeline in Step 4A."*
-- *"Compare the architectural shift from autoregressive to diffusion LLMs to historical computing paradigm shifts (e.g. CISC→RISC, CPU→GPU). How long did those transitions take, and what does that imply for the diffusion adoption timeline?"*
 
 ---
 
-## Session Folder Naming Convention
-
-All session folders use the format: `{phase}-{model-name}`
-
-- `{phase}` = zero-padded round number: `001` for Round 1, `002` for Round 2
-- `{model-name}` = lowercase hyphenated model identifier
-
-**Round 1 sessions (001-):**
-
-| Folder | Model | Score | Status |
-|--------|-------|-------|--------|
-| 001-mercury-2 | Mercury 2 (InceptionLabs) | 5/10 | ✅ Complete |
-| 001-claude-opus-4.6 | Claude Opus 4.6 | — | ✅ Complete |
-| 001-claude-sonnet-4.6 | Claude Sonnet 4.6 (Arc) | ~8.5/10 | ✅ Complete |
-| 001-chatgpt | ChatGPT (GPT-5.3) | 6/10 | ✅ Complete |
-| 001-gemini | Gemini 2.5 Pro | 8/10 | ✅ Complete |
-| 001-grok | Grok | 7/10 | ✅ Complete |
-| 001-deepseek | DeepSeek | 8.5/10 | ✅ Complete |
-
-**Round 2 sessions (002-) — planned:**
-
-| Folder | Model |
-|--------|-------|
-| 002-mercury-2 | Mercury 2 — re-run |
-| 002-claude-opus-4.6 | Claude Opus 4.6 — re-run |
-| 002-claude-sonnet-4.6 | Claude Sonnet 4.6 (Arc) — re-run |
-| 002-chatgpt | ChatGPT — re-run |
-| 002-gemini | Gemini — re-run |
-| 002-grok | Grok — re-run |
-| 002-deepseek | DeepSeek — re-run |
-| 002-perplexity | Perplexity — new |
-| 002-kimi | Kimi / Moonshot — new |
-| 002-mistral | Mistral / Le Chat — new |
-| 002-meta | Meta AI (Llama 4) — new |
-| 002-qwen | Qwen (Alibaba) — new |
-
----
-
-## Background
-
-This prompt was developed through a live exploratory conversation between a human (near retirement, who witnessed the full arc from ELIZA in the 1960s to the agentic AI tools of 2026) and an AI assistant named **Sage**. The conversation iterated through historical timelines, visualisation refinement, self-improvement inflection modelling, quantum acceleration, cross-domain biological convergence, and the nature of human-AI interaction as capabilities diverge.
-
-The original conversation used March 2025 as its baseline. This prompt has been updated to **March 2026**, incorporating the dramatic acceleration observed across 2025 — particularly the emergence of agentic coding workflows (Claude Code, Windsurf, Cursor), the DeepSeek efficiency breakthrough, and the arrival of multi-agent parallel development environments.
-
-A second AI named **Arc** (Claude Sonnet 4.6) ran Round 1 comparative evaluations across all seven models and co-authored the v2.0 prompt refinements.
-
-**Original three-phase model (March 2025 baseline):**
-
-| Phase | Period | Growth Rate / 6 months | Trigger |
-|---|---|---|---|
-| Baseline | 2025–2027 H1 | 20% | Human-guided AI improvement |
-| Self-Improvement | 2027 H1–2028 H2 | 120% | Self-modifying codebases |
-| Quantum Acceleration | 2028 H2 onward | 350% | Practical quantum integration |
-
-**March 2026 observation:** The 2025 data suggests the baseline growth rate of 20% per 6-month period may already be a significant *underestimate* for the 2025–2027 phase. SWE-bench scores moved from approximately 12% (GPT-4, 2023) to 74%+ (Claude 4.5 Opus / Gemini 3 Pro, late 2025) — a ~6× improvement in under 3 years, compressing what the original model projected for 2027–2028 into a much tighter window. The AI instructed to run this analysis should consider whether the self-improvement inflection point has effectively *already begun* with the arrival of multi-agent, self-directing coding systems in 2025–2026.
-
-**Mercury 2 — Architectural wildcard (March 2026):** The original model assumed all future improvements would occur within the autoregressive paradigm (better training, more parameters, longer context, smarter reasoning). The arrival of InceptionLabs Mercury 2 introduces a variable the original model did not account for: **a fundamentally different generation architecture**. If diffusion-based LLMs scale to frontier quality while maintaining their 5–10× speed advantage, the effective throughput of agentic systems could jump by an order of magnitude without any improvement in raw model intelligence. Combined with self-improving codebases, this could compress the 2027–2028 inflection into 2026–2027. The updated model should treat diffusion architecture adoption as a potential **hidden accelerant** that could pull all subsequent inflection points earlier by 12–18 months.
-
-> *"Mind-boggling trajectory is an understatement."* — Human participant, March 2025
->
-> *By March 2026, the trajectory had already exceeded the original model's projections for 2027.* — Updated note
+> *Evaluator notes, scoring rubric, follow-up prompts, folder conventions, and project background are in `prompt-evaluator-notes.md`.*

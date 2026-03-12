@@ -7,7 +7,9 @@
 
 ---
 
-## Round 1 — Re-runs (all required for v2.0 comparison)
+## Round 1 — The Pioneer Set (re-runs required for v2.0 comparison)
+
+These seven models were the first to run the prompt. Round 2 re-runs them under identical v2.0 conditions for a true apples-to-apples comparison.
 
 | Model | URL | Notes |
 |-------|-----|-------|
@@ -57,14 +59,14 @@
 | ChatGPT | ✅ Complete | ⏳ Pending v2.0 | r1-draft-4 | 6/10 |
 | Grok | ✅ Complete | ⏳ Pending v2.0 | r1-draft-6 | 7/10 |
 | Gemini 2.5 Pro | ✅ Complete | ⏳ Pending v2.0 | r1-draft-5 | 8/10 |
-| Claude Opus 4.6 | ✅ Complete | ⏳ Pending v2.0 | r1-draft-2 | — |
+| Claude Opus 4.6 | ✅ Complete | ⏳ Pending v2.0 | r1-draft-2 | 8/10 |
 | Claude Sonnet 4.6 (Arc) | ✅ Complete | ⏳ Pending v2.0 | r1-draft-3 | ~8.5/10 |
 | DeepSeek | ✅ Complete | ⏳ Pending v2.0 | r1-draft-7 | 8.5/10 |
-| Perplexity | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
-| Kimi / Moonshot | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
-| Mistral / Le Chat | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
-| Meta AI (Llama 4) | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
-| Qwen (Alibaba) | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
+| Perplexity | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Kimi / Moonshot | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Mistral / Le Chat | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Meta AI (Llama 4) | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Qwen (Alibaba) | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
 | Microsoft Copilot | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
 | Pi (Inflection AI) | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
 
