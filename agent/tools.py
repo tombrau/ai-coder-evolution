@@ -268,7 +268,6 @@ You are running autonomously — Tom is not present in real time.
         model=config.CLAUDE_MODEL,
         max_tokens=1024,
         system=system_prompt,
-        messages=[{"role": "user", "content": task}],
-        timeout=60.0
+        messages=[{"role": "user", "content": task}]
     )
     return response.content[0].text
