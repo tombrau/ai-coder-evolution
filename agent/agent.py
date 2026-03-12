@@ -17,7 +17,6 @@ Telegram commands Tom can send:
 import asyncio
 import logging
 import datetime
-from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 import config
@@ -242,18 +241,23 @@ async def handle_message(update, context):
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
-async def main():
+async def scheduled_weekly_check(context):
+    """Wrapper for APT job queue."""
+    await weekly_check()
+
+
+async def scheduled_heartbeat(context):
+    """Wrapper for daily heartbeat."""
+    await daily_heartbeat()
+
+
+def main():
     log.info("Arc agent starting...")
 
-    # Scheduler
-    scheduler = AsyncIOScheduler()
-    scheduler.add_job(weekly_check, "cron", day_of_week="mon", hour=9, minute=0)
-    # Uncomment for daily heartbeat:
-    # scheduler.add_job(daily_heartbeat, "cron", hour=8, minute=0)
-    scheduler.start()
-
-    # Telegram bot
+    # Build app with job queue enabled
     app = Application.builder().token(config.TELEGRAM_BOT_TOKEN).build()
+
+    # Handlers
     app.add_handler(CommandHandler("hello", cmd_hello))
     app.add_handler(CommandHandler("status", cmd_status))
     app.add_handler(CommandHandler("search", cmd_search))
@@ -261,11 +265,20 @@ async def main():
     app.add_handler(CommandHandler("commit", cmd_commit))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
-    await tools.telegram_send("🟢 *Arc agent started.* Type /hello to confirm.")
-    log.info("Arc agent running. Waiting for triggers...")
+    # Schedule weekly check via built-in job queue (Mondays 9am)
+    app.job_queue.run_daily(
+        scheduled_weekly_check,
+        time=datetime.time(hour=9, minute=0),
+        days=(0,),  # Monday
+        name="weekly_check"
+    )
 
-    await app.run_polling(drop_pending_updates=True)
+    # Uncomment for daily heartbeat:
+    # app.job_queue.run_daily(scheduled_heartbeat, time=datetime.time(hour=8, minute=0))
+
+    log.info("Arc agent running. Waiting for triggers...")
+    app.run_polling(drop_pending_updates=True, allowed_updates=True)
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
