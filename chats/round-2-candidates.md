@@ -40,6 +40,14 @@ These seven models were the first to run the prompt. Round 2 re-runs them under 
 | **Meta AI (Llama 4)** | https://www.meta.ai | Only major model with public weights. Open-source frontier representative. Meaningful question: does open vs closed training affect prompt compliance or analytical depth? | Free |
 | **Qwen (Alibaba)** | https://chat.qwen.ai | Specifically strong on coding benchmarks. Most direct coding-specialist comparison in the set. Second Chinese frontier lab. | Regional access issues possible from AU — may need VPN |
 
+### Priority 2b — Nemotron 3 Super (newly spotted)
+
+| Model | URL | Rationale | Access |
+|-------|-----|-----------|--------|
+| **Nemotron 3 Super** | https://www.perplexity.ai (via model selector) | NVIDIA's model — hardware company rather than software lab, independent training lineage. Spotted in Perplexity's free model list with a "New" tag. Different perspective from all current candidates. Access: free via Perplexity interface. | Free |
+
+---
+
 ### Priority 3 — Interesting outliers
 
 | Model | URL | Rationale | Access |
@@ -62,11 +70,12 @@ These seven models were the first to run the prompt. Round 2 re-runs them under 
 | Claude Opus 4.6 | ✅ Complete | ⏳ Pending v2.0 | r1-draft-2 | 8/10 |
 | Claude Sonnet 4.6 (Arc) | ✅ Complete | ⏳ Pending v2.0 | r1-draft-3 | ~8.5/10 |
 | DeepSeek | ✅ Complete | ⏳ Pending v2.0 | r1-draft-7 | 8.5/10 |
-| Perplexity | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Perplexity | ⛔ Blocked (paid) | ⏳ Pending v2.1 | v2.1 | — |
 | Kimi / Moonshot | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
 | Mistral / Le Chat | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
 | Meta AI (Llama 4) | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
 | Qwen (Alibaba) | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
+| Nemotron 3 Super (NVIDIA) | ⏳ Not started | ⏳ Pending v2.1 | v2.1 | — |
 | Microsoft Copilot | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
 | Pi (Inflection AI) | ⏳ Not started | ⏳ Pending v2.0 | v2.0 | — |
 

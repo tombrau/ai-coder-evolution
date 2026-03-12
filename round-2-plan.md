@@ -32,7 +32,7 @@ Two things happen in Round 2:
 
 | # | Model | URL | Why first |
 |---|-------|-----|-----------|
-| 1 | Perplexity | https://www.perplexity.ai | Search-native — strongest test of the Search Report requirement |
+| 1 | ~~Perplexity~~ | https://www.perplexity.ai | ⛔ BLOCKED — Sonar requires paid subscription. Free tier only wraps other models. Park until Pro available. |
 | 2 | Kimi / Moonshot | https://kimi.ai | Self-review tension (Kimi K2.5 is in the milestone list) |
 | 3 | Mistral / Le Chat | https://chat.mistral.ai | EU perspective, independent lineage |
 
