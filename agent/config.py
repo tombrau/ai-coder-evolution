@@ -21,7 +21,7 @@ SESSIONS_DIR = os.getenv("SESSIONS_DIR", f"{PROJECT_DIR}/sessions")
 PRIVATE_DIR = os.getenv("PRIVATE_DIR", "/opt/arc/private")
 
 # Model
-CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-5-20251001")
+CLAUDE_MODEL = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6")
 
 # Arc's identity files — read at start of every run
 IDENTITY_FILE = f"{SESSIONS_DIR}/arc-identity.md"
