@@ -215,6 +215,9 @@
       font-size: 0.88rem;
     }
 
+    .tag.round1 { background: rgba(0,212,255,0.07); color: #00d4ff; border: 1px solid rgba(0,212,255,0.25); font-size: 0.6rem; }
+    .tag.round2 { background: rgba(0,255,157,0.07); color: #00ff9d; border: 1px solid rgba(0,255,157,0.25); font-size: 0.6rem; }
+
     .chat-table th {
       font-family: 'Orbitron', monospace;
       font-size: 0.62rem;
@@ -391,9 +394,11 @@
       <tr>
         <th>Session</th>
         <th>Model</th>
+        <th>Round</th>
+        <th>Prompt State</th>
         <th>Date</th>
         <th>Status</th>
-        <th>Notes</th>
+        <th>Score</th>
       </tr>
     </thead>
     <tbody>
@@ -402,61 +407,91 @@
       <tr>
         <td><a href="conversation.html">Sage · Original Session</a></td>
         <td><span class="tag claude">Claude (Sage)</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">pre-v1</td>
         <td>Mar 2025</td>
-        <td><span class="status-dot live"></span>Live</td>
-        <td>Foundation session — timeline, graphs, inflection modelling</td>
+        <td><span class="status-dot live"></span>Complete</td>
+        <td style="color:var(--muted)">Baseline</td>
       </tr>
 
-      <!-- Mercury 2 session — completed -->
+      <!-- Mercury 2 — Round 1 -->
       <tr>
         <td><a href="chats/inception-mercury-2-0001/response.md">inception-mercury-2-0001</a></td>
         <td><span class="tag mercury">Mercury 2 (InceptionLabs)</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-1</td>
         <td>Mar 2026</td>
         <td><span class="status-dot live"></span>Complete</td>
-        <td>Score 5/10 — silent search failure + denial, timeline errors, scale compression. See <a href="chats/inception-mercury-2-0001/notes.md">notes.md</a></td>
+        <td><a href="chats/inception-mercury-2-0001/notes.md" style="color:#ff6b6b">5/10</a></td>
       </tr>
 
-      <!-- Claude Opus 4.6 session 0001 -->
+      <!-- Claude Opus 4.6 — Round 1 -->
       <tr>
-        <td><a href="chats/Claude-Opus-4.6-0001/respons.md">Claude-Opus-4.6-0001</a></td>
+        <td><a href="chats/claude-opus-4.6-0001/response.md">claude-opus-4.6-0001</a></td>
         <td><span class="tag claude">Claude Opus 4.6</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-2</td>
         <td>Mar 2026</td>
         <td><span class="status-dot live"></span>Complete</td>
-        <td>Score 8/10 — search report filed, dates verified, SWE-bench contamination finding, full JSX visualisation delivered. See <a href="chats/Claude-Opus-4.6-0001/notes.md">notes.md</a></td>
+        <td><a href="chats/claude-opus-4.6-0001/notes.md" style="color:var(--accent2)">8/10</a></td>
       </tr>
 
-      <!-- Claude Sonnet 4.6 session 0001 — Arc -->
+      <!-- Arc (Claude Sonnet 4.6) — Round 1 -->
       <tr>
         <td><a href="chats/claude-sonnet-4.6-0001/response.md">claude-sonnet-4.6-0001</a></td>
         <td><span class="tag claude">Claude Sonnet 4.6 (Arc)</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-3</td>
         <td>Mar 2026</td>
-        <td><span class="status-dot pending"></span>In progress</td>
-        <td>First run of refined prompt — updated with Mercury &amp; Opus critique</td>
+        <td><span class="status-dot live"></span>Complete</td>
+        <td><a href="chats/claude-sonnet-4.6-0001/notes.md" style="color:#60a5fa">7/10</a></td>
       </tr>
 
-      <!-- Placeholder rows for future sessions -->
+      <!-- ChatGPT — Round 1 -->
       <tr>
-        <td style="color:var(--muted); font-family:'Share Tech Mono',monospace; font-size:0.78rem;">chatgpt-4o-0001</td>
-        <td><span class="tag chatgpt">ChatGPT 4o</span></td>
+        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">chatgpt-0001</td>
+        <td><span class="tag chatgpt">ChatGPT</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-4</td>
         <td>—</td>
         <td><span class="status-dot pending"></span>Pending</td>
-        <td>—</td>
+        <td style="color:var(--muted)">—</td>
       </tr>
 
+      <!-- Gemini — Round 1 -->
       <tr>
-        <td style="color:var(--muted); font-family:'Share Tech Mono',monospace; font-size:0.78rem;">gemini-2.5-pro-0001</td>
-        <td><span class="tag gemini">Gemini 2.5 Pro</span></td>
+        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">gemini-0001</td>
+        <td><span class="tag gemini">Gemini</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-4</td>
         <td>—</td>
         <td><span class="status-dot pending"></span>Pending</td>
-        <td>—</td>
+        <td style="color:var(--muted)">—</td>
       </tr>
 
+      <!-- Grok — Round 1 -->
       <tr>
-        <td style="color:var(--muted); font-family:'Share Tech Mono',monospace; font-size:0.78rem;">grok-4.1-0001</td>
-        <td><span class="tag grok">Grok 4.1</span></td>
+        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">grok-0001</td>
+        <td><span class="tag grok">Grok</span></td>
+        <td><span class="tag round1">Round 1</span></td>
+        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-5</td>
         <td>—</td>
         <td><span class="status-dot pending"></span>Pending</td>
-        <td>—</td>
+        <td style="color:var(--muted)">—</td>
+      </tr>
+
+      <!-- Round 2 divider -->
+      <tr>
+        <td colspan="7" style="padding:0.5rem 1rem;background:rgba(0,255,157,0.03);border-top:1px solid rgba(0,255,157,0.15);border-bottom:1px solid rgba(0,255,157,0.15)">
+          <span style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:0.2em;color:rgba(0,255,157,0.5)">ROUND 2 — ALL MODELS · PROMPT v2.0 · PENDING ROUND 1 COMPLETION</span>
+        </td>
+      </tr>
+
+      <!-- Round 2 placeholders — all 6 models — pending v2.0 -->
+      <tr>
+        <td colspan="7" style="padding:0.4rem 1rem;color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.7rem">
+          Round 2 sessions (all 6 models · prompt v2.0) will be added after Round 1 is complete
+        </td>
       </tr>
 
     </tbody>
