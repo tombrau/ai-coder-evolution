@@ -1,0 +1,34 @@
+{
+ "rows": [
+  {
+   "level": "Entry-level programmer",
+   "sage_units": 350,
+   "horizon_h": 0.8,
+   "sage_predicted": "2025 H1"
+  },
+  {
+   "level": "Mid-level programmer",
+   "sage_units": 1597,
+   "horizon_h": 3.8,
+   "sage_predicted": "2027 H2"
+  },
+  {
+   "level": "Senior programmer",
+   "sage_units": 3513,
+   "horizon_h": 8.4,
+   "sage_predicted": "2028 H1"
+  },
+  {
+   "level": "Expert programmer",
+   "sage_units": 7728,
+   "horizon_h": 18.4,
+   "sage_predicted": "2028 H2"
+  },
+  {
+   "level": "Programming team",
+   "sage_units": 34776,
+   "horizon_h": 82.8,
+   "sage_predicted": "2029 H1"
+  }
+ ]
+}

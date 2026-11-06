@@ -1,0 +1,44 @@
+{
+ "rows": [
+  {
+   "date": "2026-02-24",
+   "event": "Mercury 2 ships: first diffusion reasoning model, ~1,000 tokens/s. Mercury 3 followed on 19 Oct; Google's Gemini Diffusion is still experimental.",
+   "meaning": "Diffusion is real but not yet at the frontier, so it hasn't been the accelerant the 2026 prompt asked about."
+  },
+  {
+   "date": "2026-03-15",
+   "event": "METR measures Claude Mythos Preview at a 50% time horizon of at least 16 h, the top of what its task suite can measure.",
+   "meaning": "The ruler has run out: progress since spring 2026 can't be read off the same scale."
+  },
+  {
+   "date": "2026-04-13",
+   "event": "Stanford AI Index: employment of developers aged 22\u201325 down ~20% since late 2022, while older developers' grew.",
+   "meaning": "The entry-level rung is being hit first \u2014 Gemini's 'experience paradox' from your Round 1."
+  },
+  {
+   "date": "2026-04-30",
+   "event": "Overall developer job postings up ~11% year on year (Indeed); BLS still projects 15% growth to 2034.",
+   "meaning": "Benchmarks say 'expert'; the job market says AI is a tool most teams still pair with people."
+  },
+  {
+   "date": "2026-05-19",
+   "event": "METR Frontier Risk Report: labs reported no dramatic research speed-ups (Feb\u2013Mar 2026 window).",
+   "meaning": "Self-improvement had not yet visibly compounded by spring."
+  },
+  {
+   "date": "2026-07-29",
+   "event": "SWE-bench Pro tops out near 80% (Claude Mythos 5 80.3%); SWE-bench Verified at 95.5%.",
+   "meaning": "The main coding benchmarks are close to saturated."
+  },
+  {
+   "date": "2026-09-06",
+   "event": "OpenAI says it reached its 'automated research intern' goal; agents logged 3.1 workdays per human workday in August. Target for a full automated researcher: March 2028.",
+   "meaning": "Sage's 2027 self-improvement inflection is arriving roughly on schedule \u2014 and by the labs' own account."
+  },
+  {
+   "date": "2026-09-06",
+   "event": "Quantum: logical qubits in the dozens; reviews put broad quantum speed-ups of AI training several hardware generations away.",
+   "meaning": "Sage's 2028 quantum boost (350% per six months) looks the least likely part of the model."
+  }
+ ]
+}

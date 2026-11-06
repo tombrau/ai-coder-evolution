@@ -1,0 +1,20 @@
+{
+ "rows": [
+  {
+   "target": "A working week",
+   "hours": 40
+  },
+  {
+   "target": "Sage's 'programming team'",
+   "hours": 82.8
+  },
+  {
+   "target": "A working month",
+   "hours": 167
+  },
+  {
+   "target": "A working year",
+   "hours": 2000
+  }
+ ]
+}
