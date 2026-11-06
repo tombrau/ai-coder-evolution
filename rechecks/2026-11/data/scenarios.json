@@ -1,0 +1,19 @@
+{
+ "rows": [
+  {
+   "scenario": "Fast",
+   "doubling_days": 122,
+   "why": "Recent pace continues (~4-month doubling)"
+  },
+  {
+   "scenario": "Middle",
+   "doubling_days": 213,
+   "why": "Back to the long-run trend (~7-month doubling)"
+  },
+  {
+   "scenario": "Slow",
+   "doubling_days": 365,
+   "why": "Slows to a yearly doubling"
+  }
+ ]
+}

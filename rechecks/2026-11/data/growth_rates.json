@@ -1,0 +1,29 @@
+{
+ "rows": [
+  {
+   "rate": "Sage: baseline, to 2027",
+   "x_per_6mo": 1.2,
+   "kind": "Sage 2025 model"
+  },
+  {
+   "rate": "Sage: self-improvement, 2027\u201328",
+   "x_per_6mo": 2.2,
+   "kind": "Sage 2025 model"
+  },
+  {
+   "rate": "Sage: quantum, 2028 on",
+   "x_per_6mo": 4.5,
+   "kind": "Sage 2025 model"
+  },
+  {
+   "rate": "Measured: long-run trend 2019\u201324 (7-month doubling)",
+   "x_per_6mo": 1.81,
+   "kind": "Measured (METR)"
+  },
+  {
+   "rate": "Measured: 2024\u2013Feb 2026 (~105-day doubling)",
+   "x_per_6mo": 3.34,
+   "kind": "Measured (METR)"
+  }
+ ]
+}
