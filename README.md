@@ -1,5 +1,7 @@
 # AI Coder Evolution
 
+### 👉 [Open the website](https://tombrau.github.io/ai-coder-evolution/)
+
 > Visualizing the exponential growth of AI coding capabilities — from GPT-2 (2019) to projected futures out to 2040.
 
 This project models the trajectory of AI coding capability growth, incorporating historical milestones, inflection point analysis, and projections through 2040. It was developed through a live exploratory conversation between a human and an AI assistant named **Sage**, and has been updated to reflect the dramatic acceleration observed in 2025–2026.
