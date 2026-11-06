@@ -1,0 +1,88 @@
+{
+ "rows": [
+  {
+   "period": "2025 H1",
+   "date": "2025-03-15",
+   "sage_units": 350,
+   "horizon_h": 0.83,
+   "phase": "Baseline (20%)"
+  },
+  {
+   "period": "2025 H2",
+   "date": "2025-09-15",
+   "sage_units": 420,
+   "horizon_h": 1.0,
+   "phase": "Baseline (20%)"
+  },
+  {
+   "period": "2026 H1",
+   "date": "2026-03-15",
+   "sage_units": 504,
+   "horizon_h": 1.2,
+   "phase": "Baseline (20%)"
+  },
+  {
+   "period": "2026 H2",
+   "date": "2026-09-15",
+   "sage_units": 605,
+   "horizon_h": 1.44,
+   "phase": "Baseline (20%)"
+  },
+  {
+   "period": "2027 H1",
+   "date": "2027-03-15",
+   "sage_units": 726,
+   "horizon_h": 1.73,
+   "phase": "Self-improvement (120%)"
+  },
+  {
+   "period": "2027 H2",
+   "date": "2027-09-15",
+   "sage_units": 1597,
+   "horizon_h": 3.8,
+   "phase": "Self-improvement (120%)"
+  },
+  {
+   "period": "2028 H1",
+   "date": "2028-03-15",
+   "sage_units": 3513,
+   "horizon_h": 8.36,
+   "phase": "Self-improvement (120%)"
+  },
+  {
+   "period": "2028 H2",
+   "date": "2028-09-15",
+   "sage_units": 7728,
+   "horizon_h": 18.4,
+   "phase": "Quantum (350%)"
+  },
+  {
+   "period": "2029 H1",
+   "date": "2029-03-15",
+   "sage_units": 34776,
+   "horizon_h": 82.8,
+   "phase": "Quantum (350%)"
+  },
+  {
+   "period": "2029 H2",
+   "date": "2029-09-15",
+   "sage_units": 156490,
+   "horizon_h": 372.59,
+   "phase": "Quantum (350%)"
+  },
+  {
+   "period": "2030 H1",
+   "date": "2030-03-15",
+   "sage_units": 704204,
+   "horizon_h": 1676.68,
+   "phase": "Quantum (350%)"
+  },
+  {
+   "period": "2030 H2",
+   "date": "2030-09-15",
+   "sage_units": 3168919,
+   "horizon_h": 7545.05,
+   "phase": "Quantum (350%)"
+  }
+ ]
+}

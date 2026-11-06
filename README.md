@@ -46,6 +46,14 @@ Mercury 2 is the first commercially available **diffusion-based reasoning LLM (d
 
 ---
 
+## 🔍 November 2026 Re-check
+
+Sage's 2025 model scored against real measurements (METR task-length data) and 2026 news. Headline: the mid-level programmer line Sage placed in 2027 H2 was crossed in **Nov 2025**, and the senior line in **Feb 2026** — but via reasoning models, not self-improvement or quantum. Full write-up, data and chart: **[`rechecks/2026-11/`](rechecks/2026-11/README.md)**.
+
+![November 2026 re-check](rechecks/2026-11/chart.png)
+
+---
+
 ## 🚀 Live Demo
 
 Hosted via GitHub Pages: **[https://tombrau.github.io/ai-coder-evolution/](https://tombrau.github.io/ai-coder-evolution/)**
