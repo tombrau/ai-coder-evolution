@@ -4,531 +4,134 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AI Coder Evolution</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/readable.css" />
   <style>
-    :root {
-      --bg:      #050a0f;
-      --surface: #0c1520;
-      --border:  #0e2a40;
-      --accent:  #00d4ff;
-      --accent2: #00ff9d;
-      --sage:    #7b68ee;
-      --text:    #c8d8e8;
-      --muted:   #4a6070;
-    }
+    main, header, footer { max-width: 960px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    header { padding-top: 3rem; padding-bottom: 2rem; border-bottom: 2px solid var(--border); }
+    .badge { display: inline-block; font-weight: 700; color: var(--accent2); border: 2px solid var(--accent2); padding: 0.15rem 0.7rem; border-radius: 4px; margin-bottom: 1rem; font-size: 0.9rem; }
+    h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.15; margin: 0 0 0.5rem; }
+    header p { color: var(--muted); font-size: 1.05rem; max-width: 40rem; }
+    main { padding-top: 2rem; padding-bottom: 4rem; }
+    h2 { font-size: 1.35rem; margin: 2.5rem 0 1rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--border); }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); gap: 1rem; }
+    .stat { background: var(--surface); border: 2px solid var(--border); border-radius: 6px; padding: 1rem; }
+    .stat b { display: block; font-size: 1.7rem; color: var(--accent); line-height: 1.2; }
+    .stat span { color: var(--muted); font-size: 0.95rem; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      line-height: 1.75;
-      min-height: 100vh;
-    }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1rem; }
+    .card { display: block; background: var(--surface); border: 2px solid var(--border); border-left: 6px solid var(--c, var(--accent)); border-radius: 6px; padding: 1.1rem 1.25rem; text-decoration: none; color: var(--text); }
+    a.card:hover, a.card:focus-visible { border-color: var(--c, var(--accent)); background: #f3f6fb; }
+    .card .t { font-weight: 700; font-size: 1.15rem; color: var(--c, var(--accent)); margin-bottom: 0.3rem; }
+    a.card .t { text-decoration: underline; text-underline-offset: 3px; }
+    .card p { margin: 0; }
+    .card .m { color: var(--muted); font-size: 0.9rem; margin-top: 0.6rem; }
+    .card.new { --c: var(--red); background: #fff7f2; }
+    .navy { --c: var(--accent); } .green { --c: var(--accent2); } .purple { --c: var(--sage); } .orange { --c: var(--orange); }
 
-    /* Starfield */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(1px 1px at 15% 25%, rgba(0,212,255,0.35) 0%, transparent 100%),
-        radial-gradient(1px 1px at 55% 10%, rgba(0,255,157,0.25) 0%, transparent 100%),
-        radial-gradient(1px 1px at 80% 60%, rgba(123,104,238,0.35) 0%, transparent 100%),
-        radial-gradient(1px 1px at 35% 80%, rgba(0,212,255,0.2)  0%, transparent 100%),
-        radial-gradient(1px 1px at 92% 35%, rgba(0,255,157,0.2)  0%, transparent 100%);
-      pointer-events: none;
-      z-index: 0;
-    }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border: 2px solid var(--border); }
+    th, td { text-align: left; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); }
+    thead th { background: #eeebe3; }
+    tbody th { font-weight: 700; }
+    td.none { color: var(--muted); }
+    .note { color: var(--muted); font-size: 0.95rem; margin-top: 0.6rem; }
+    .tablewrap { overflow-x: auto; }
 
-    /* Scanlines */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* ── HEADER ── */
-    header {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 4rem 2rem 3rem;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(0,212,255,0.04) 0%, transparent 100%);
-    }
-
-    .badge {
-      display: inline-block;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.68rem;
-      letter-spacing: 0.25em;
-      color: var(--accent2);
-      border: 1px solid rgba(0,255,157,0.3);
-      padding: 0.3rem 1rem;
-      border-radius: 2px;
-      margin-bottom: 1.5rem;
-      animation: pulse 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 0.7; box-shadow: 0 0 8px rgba(0,255,157,0.1); }
-      50%       { opacity: 1;   box-shadow: 0 0 18px rgba(0,255,157,0.3); }
-    }
-
-    header h1 {
-      font-family: 'Orbitron', monospace;
-      font-size: clamp(1.8rem, 5vw, 3.2rem);
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--sage) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 0.75rem;
-    }
-
-    header p {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--muted);
-      letter-spacing: 0.12em;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* ── MAIN LAYOUT ── */
-    main {
-      position: relative;
-      z-index: 10;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 3rem 2rem 6rem;
-    }
-
-    /* ── SECTION HEADERS ── */
-    .section-label {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(0,212,255,0.3), transparent);
-    }
-
-    /* ── CARDS ── */
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
-      margin-bottom: 3rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 1.4rem 1.6rem;
-      text-decoration: none;
-      color: var(--text);
-      display: block;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--card-accent, var(--accent));
-      opacity: 0.6;
-      transition: opacity 0.2s;
-    }
-
-    .card:hover {
-      border-color: var(--card-accent, var(--accent));
-      box-shadow: 0 0 24px rgba(0,212,255,0.1);
-      transform: translateY(-2px);
-    }
-
-    .card:hover::before { opacity: 1; }
-
-    .card-icon {
-      font-size: 1.4rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .card-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--card-accent, var(--accent));
-      margin-bottom: 0.4rem;
-    }
-
-    .card-desc {
-      font-size: 0.85rem;
-      color: #8aa0b4;
-      line-height: 1.6;
-    }
-
-    .card-meta {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.68rem;
-      color: var(--muted);
-      margin-top: 0.8rem;
-      letter-spacing: 0.08em;
-    }
-
-    /* Card accent colour variants */
-    .card.cyan   { --card-accent: #00d4ff; }
-    .card.green  { --card-accent: #00ff9d; }
-    .card.purple { --card-accent: #7b68ee; }
-    .card.orange { --card-accent: #ff9f43; }
-
-    /* ── CHAT SESSION TABLE ── */
-    .chat-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 3rem;
-      font-size: 0.88rem;
-    }
-
-    .tag.round1 { background: rgba(0,212,255,0.07); color: #00d4ff; border: 1px solid rgba(0,212,255,0.25); font-size: 0.6rem; }
-    .tag.round2 { background: rgba(0,255,157,0.07); color: #00ff9d; border: 1px solid rgba(0,255,157,0.25); font-size: 0.6rem; }
-
-    .chat-table th {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.62rem;
-      letter-spacing: 0.2em;
-      color: var(--muted);
-      text-align: left;
-      padding: 0.6rem 1rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .chat-table td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid rgba(14,42,64,0.5);
-      vertical-align: middle;
-    }
-
-    .chat-table tr:hover td {
-      background: rgba(0,212,255,0.03);
-    }
-
-    .chat-table a {
-      color: var(--accent);
-      text-decoration: none;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.82rem;
-      border-bottom: 1px solid rgba(0,212,255,0.2);
-      transition: border-color 0.2s;
-    }
-
-    .chat-table a:hover { border-color: var(--accent); }
-
-    .tag {
-      display: inline-block;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem;
-      padding: 0.15rem 0.5rem;
-      border-radius: 2px;
-      letter-spacing: 0.05em;
-    }
-
-    .tag.claude   { background: rgba(123,104,238,0.15); color: #7b68ee; border: 1px solid rgba(123,104,238,0.3); }
-    .tag.chatgpt  { background: rgba(0,255,157,0.1);    color: #00ff9d; border: 1px solid rgba(0,255,157,0.3); }
-    .tag.gemini   { background: rgba(0,212,255,0.1);    color: #00d4ff; border: 1px solid rgba(0,212,255,0.3); }
-    .tag.grok     { background: rgba(255,159,67,0.1);   color: #ff9f43; border: 1px solid rgba(255,159,67,0.3); }
-    .tag.mercury  { background: rgba(0,255,200,0.08);   color: #00ffc8; border: 1px solid rgba(0,255,200,0.3); }
-    .tag.pending  { background: rgba(74,96,112,0.15);   color: #4a6070; border: 1px solid rgba(74,96,112,0.3); }
-
-    .status-dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      margin-right: 0.4rem;
-    }
-    .status-dot.live    { background: var(--accent2); box-shadow: 0 0 6px var(--accent2); }
-    .status-dot.pending { background: var(--muted); }
-
-    /* ── STATS BAR ── */
-    .stats {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-      padding: 1.2rem 1.6rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent);
-    }
-
-    .stat-item { text-align: center; }
-
-    .stat-value {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent);
-      display: block;
-    }
-
-    .stat-label {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      position: relative;
-      z-index: 10;
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid var(--border);
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-
-    footer a { color: var(--accent); text-decoration: none; }
-
-    @media (max-width: 600px) {
-      main { padding: 2rem 1.2rem 4rem; }
-      .stats { gap: 1rem; }
-      .card-grid { grid-template-columns: 1fr; }
-    }
+    footer { border-top: 2px solid var(--border); padding-top: 1.5rem; padding-bottom: 2rem; color: var(--muted); }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="badge">GPT-2 → 2040 · Updated March 2026</div>
+  <div class="badge">GPT-2 → 2040 · Re-checked November 2026</div>
   <h1>AI Coder Evolution</h1>
-  <p>Tracking the exponential growth of AI coding capabilities &nbsp;·&nbsp; Multi-model analysis &nbsp;·&nbsp; 2019 → 2040</p>
+  <p>Tracking how fast AI coding ability is growing, from GPT-2 in 2019 to projections out to 2040, compared across many AI models.</p>
 </header>
 
 <main>
 
-  <!-- Stats bar -->
-  <div class="stats">
-    <div class="stat-item">
-      <span class="stat-value">2019</span>
-      <span class="stat-label">Timeline Start</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">2040</span>
-      <span class="stat-label">Projection End</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">74.4%</span>
-      <span class="stat-label">SWE-Bench (Best, Feb 2026)</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">350%</span>
-      <span class="stat-label">Post-Quantum Growth / 6mo</span>
-    </div>
-    <div class="stat-item">
-      <span class="stat-value">~2029</span>
-      <span class="stat-label">Team Equiv. Projected</span>
-    </div>
+  <h2>Latest: November 2026 re-check</h2>
+  <div class="stats" aria-label="Re-check headline figures">
+    <div class="stat"><b>Nov 2025</b><span>Mid-level programmer line crossed (Sage forecast 2027 H2)</span></div>
+    <div class="stat"><b>Feb 2026</b><span>Senior programmer line crossed (Sage forecast 2028 H1)</span></div>
+    <div class="stat"><b>~17 h</b><span>Longest task length measured (Mar 2026)</span></div>
+    <div class="stat"><b>3.3×</b><span>Measured growth per six months, against Sage's 1.2×</span></div>
+  </div>
+  <div class="cards" style="margin-top:1rem">
+    <a href="rechecks/2026-11/" class="card new">
+      <div class="t">Read the November 2026 re-check</div>
+      <p>Sage's 2025 model scored against real measurements and 2026 news: what it got right, where it was too slow, and three paths forward.</p>
+      <div class="m">6 Nov 2026 · Arc (Claude)</div>
+    </a>
   </div>
 
-  <!-- Core documents -->
-  <div class="section-label">Core Documents</div>
-  <div class="card-grid">
-
-    <a href="conversation.html" class="card cyan">
-      <div class="card-icon">💬</div>
-      <div class="card-title">Original Conversation</div>
-      <div class="card-desc">The original Sage session — from GPT-2 timeline to quantum acceleration, self-improvement inflection, and the technological singularity.</div>
-      <div class="card-meta">March 2025 · Human + Sage (Claude)</div>
+  <h2>Core documents</h2>
+  <div class="cards">
+    <a href="conversation.html" class="card navy">
+      <div class="t">Original conversation</div>
+      <p>The original Sage session: from the GPT-2 timeline to quantum acceleration, self-improvement and the technological singularity.</p>
+      <div class="m">March 2025 · Tom + Sage (Claude)</div>
     </a>
-
     <a href="prompt.md" class="card green">
-      <div class="card-icon">📋</div>
-      <div class="card-title">Reusable Prompt</div>
-      <div class="card-desc">Drop this into any AI assistant to reproduce and extend the full analysis — includes web search instructions, 8 structured steps, and follow-up prompts.</div>
-      <div class="card-meta">Updated March 2026 · Compatible with any AI</div>
+      <div class="t">Reusable prompt</div>
+      <p>Drop this into any AI assistant to reproduce and extend the analysis, with web search instructions, structured steps and follow-up prompts.</p>
+      <div class="m">Updated March 2026 · Works with any AI</div>
     </a>
-
-    <a href="https://github.com/tombrau/ai-coder-evolution" class="card purple" target="_blank">
-      <div class="card-icon">⚙️</div>
-      <div class="card-title">GitHub Repository</div>
-      <div class="card-desc">Source code, all conversation transcripts, graphs, and version history. Fork it, extend it, run the prompt on your own AI.</div>
-      <div class="card-meta">github.com/tombrau/ai-coder-evolution</div>
+    <a href="https://github.com/tombrau/ai-coder-evolution" class="card purple">
+      <div class="t">GitHub repository</div>
+      <p>Source code, every transcript and critique, graphs and version history.</p>
+      <div class="m">github.com/tombrau/ai-coder-evolution</div>
     </a>
-
   </div>
 
-  <!-- Chat sessions -->
-  <div class="section-label">Chat Sessions — Multi-Model Comparison</div>
+  <h2>Model comparison sessions</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th scope="col">Model</th><th scope="col">Round 1</th><th scope="col">Round 2 (prompt v2)</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Sage (Claude) · baseline</th><td><a href="conversation.html">Original session</a></td><td class="none">—</td></tr>
+        <tr><th scope="row">ChatGPT</th><td><a href="chats/001-chatgpt/response.md">Response</a> · <a href="chats/001-chatgpt/notes.md">Critique</a></td><td><a href="chats/002-chatgpt/response.md">Response</a> · <a href="chats/002-chatgpt/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Claude Opus 4.6</th><td><a href="chats/001-claude-opus-4.6/response.md">Response</a> · <a href="chats/001-claude-opus-4.6/notes.md">Critique</a></td><td><a href="chats/002-claude-opus-4.6/response.md">Response</a> · <a href="chats/002-claude-opus-4.6/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Claude Sonnet 4.6 (Arc)</th><td><a href="chats/001-claude-sonnet-4.6/response.md">Response</a> · <a href="chats/001-claude-sonnet-4.6/notes.md">Critique</a></td><td><a href="chats/002-claude-sonnet-4.6/response.md">Response</a> · <a href="chats/002-claude-sonnet-4.6/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">DeepSeek</th><td><a href="chats/001-deepseek/response.md">Response</a> · <a href="chats/001-deepseek/notes.md">Critique</a></td><td><a href="chats/002-deepseek/response.md">Response</a> · <a href="chats/002-deepseek/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Gemini</th><td><a href="chats/001-gemini/response.md">Response</a> · <a href="chats/001-gemini/notes.md">Critique</a></td><td><a href="chats/002-gemini/response.md">Response</a> · <a href="chats/002-gemini/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Grok</th><td><a href="chats/001-grok/response.md">Response</a> · <a href="chats/001-grok/notes.md">Critique</a></td><td><a href="chats/002-grok/response.md">Response</a> · <a href="chats/002-grok/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Mercury 2 (Inception)</th><td><a href="chats/001-mercury-2/response.md">Response</a> · <a href="chats/001-mercury-2/notes.md">Critique</a></td><td><a href="chats/002-mercury-2/response.md">Response</a> · <a href="chats/002-mercury-2/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Kimi</th><td class="none">—</td><td><a href="chats/002-kimi/response.md">Response</a> · <a href="chats/002-kimi/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Meta AI</th><td class="none">—</td><td><a href="chats/002-meta/response.md">Response</a> · <a href="chats/002-meta/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Mistral</th><td class="none">—</td><td><a href="chats/002-mistral/response.md">Response</a> · <a href="chats/002-mistral/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Nemotron</th><td class="none">—</td><td><a href="chats/002-nemotron/response.md">Response</a> · <a href="chats/002-nemotron/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Perplexity</th><td class="none">—</td><td><a href="chats/002-perplexity/response.md">Response</a> · <a href="chats/002-perplexity/notes.md">Critique</a></td></tr>
+        <tr><th scope="row">Qwen</th><td class="none">—</td><td><a href="chats/002-qwen/response.md">Response</a> · <a href="chats/002-qwen/notes.md">Critique</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">Each critique, written by Arc, gives that model's score out of 10.</p>
 
-  <table class="chat-table">
-    <thead>
-      <tr>
-        <th>Session</th>
-        <th>Model</th>
-        <th>Round</th>
-        <th>Prompt State</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Score</th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <!-- Original Sage conversation -->
-      <tr>
-        <td><a href="conversation.html">Sage · Original Session</a></td>
-        <td><span class="tag claude">Claude (Sage)</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">pre-v1</td>
-        <td>Mar 2025</td>
-        <td><span class="status-dot live"></span>Complete</td>
-        <td style="color:var(--muted)">Baseline</td>
-      </tr>
-
-      <!-- Mercury 2 — Round 1 -->
-      <tr>
-        <td><a href="chats/inception-mercury-2-0001/response.md">inception-mercury-2-0001</a></td>
-        <td><span class="tag mercury">Mercury 2 (InceptionLabs)</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-1</td>
-        <td>Mar 2026</td>
-        <td><span class="status-dot live"></span>Complete</td>
-        <td><a href="chats/inception-mercury-2-0001/notes.md" style="color:#ff6b6b">5/10</a></td>
-      </tr>
-
-      <!-- Claude Opus 4.6 — Round 1 -->
-      <tr>
-        <td><a href="chats/claude-opus-4.6-0001/response.md">claude-opus-4.6-0001</a></td>
-        <td><span class="tag claude">Claude Opus 4.6</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-2</td>
-        <td>Mar 2026</td>
-        <td><span class="status-dot live"></span>Complete</td>
-        <td><a href="chats/claude-opus-4.6-0001/notes.md" style="color:var(--accent2)">8/10</a></td>
-      </tr>
-
-      <!-- Arc (Claude Sonnet 4.6) — Round 1 -->
-      <tr>
-        <td><a href="chats/claude-sonnet-4.6-0001/response.md">claude-sonnet-4.6-0001</a></td>
-        <td><span class="tag claude">Claude Sonnet 4.6 (Arc)</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-3</td>
-        <td>Mar 2026</td>
-        <td><span class="status-dot live"></span>Complete</td>
-        <td><a href="chats/claude-sonnet-4.6-0001/notes.md" style="color:#60a5fa">7/10</a></td>
-      </tr>
-
-      <!-- ChatGPT — Round 1 -->
-      <tr>
-        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">chatgpt-0001</td>
-        <td><span class="tag chatgpt">ChatGPT</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-4</td>
-        <td>—</td>
-        <td><span class="status-dot pending"></span>Pending</td>
-        <td style="color:var(--muted)">—</td>
-      </tr>
-
-      <!-- Gemini — Round 1 -->
-      <tr>
-        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">gemini-0001</td>
-        <td><span class="tag gemini">Gemini</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-4</td>
-        <td>—</td>
-        <td><span class="status-dot pending"></span>Pending</td>
-        <td style="color:var(--muted)">—</td>
-      </tr>
-
-      <!-- Grok — Round 1 -->
-      <tr>
-        <td style="color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.78rem">grok-0001</td>
-        <td><span class="tag grok">Grok</span></td>
-        <td><span class="tag round1">Round 1</span></td>
-        <td style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--muted)">r1-draft-5</td>
-        <td>—</td>
-        <td><span class="status-dot pending"></span>Pending</td>
-        <td style="color:var(--muted)">—</td>
-      </tr>
-
-      <!-- Round 2 divider -->
-      <tr>
-        <td colspan="7" style="padding:0.5rem 1rem;background:rgba(0,255,157,0.03);border-top:1px solid rgba(0,255,157,0.15);border-bottom:1px solid rgba(0,255,157,0.15)">
-          <span style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:0.2em;color:rgba(0,255,157,0.5)">ROUND 2 — ALL MODELS · PROMPT v2.0 · PENDING ROUND 1 COMPLETION</span>
-        </td>
-      </tr>
-
-      <!-- Round 2 placeholders — all 6 models — pending v2.0 -->
-      <tr>
-        <td colspan="7" style="padding:0.4rem 1rem;color:var(--muted);font-family:'Share Tech Mono',monospace;font-size:0.7rem">
-          Round 2 sessions (all 6 models · prompt v2.0) will be added after Round 1 is complete
-        </td>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <!-- Key milestones quick ref -->
-  <div class="section-label">Key Milestones — Quick Reference</div>
-  <div class="card-grid">
-
+  <h2>The original model's milestones (March 2025)</h2>
+  <div class="cards">
     <div class="card green">
-      <div class="card-icon">⚡</div>
-      <div class="card-title">Mercury 2 — March 2026</div>
-      <div class="card-desc">First diffusion-based reasoning LLM. ~1,000 tokens/sec — 5–10× faster than autoregressive models. Architectural wildcard that could pull all inflection points 12–18 months earlier.</div>
-      <div class="card-meta">InceptionLabs · dLLM · Feb/Mar 2026</div>
+      <div class="t">Mercury 2: March 2026</div>
+      <p>First diffusion-based reasoning model, around 1,000 tokens a second. By November 2026 still not at the frontier.</p>
+      <div class="m">Inception · diffusion LLM</div>
     </div>
-
     <div class="card purple">
-      <div class="card-icon">🤖</div>
-      <div class="card-title">Self-Improvement Inflection — ~2027</div>
-      <div class="card-desc">AI rewrites its own architecture and training pipelines. Growth rate jumps from 20% to 120% per 6-month period. Multi-agent systems in 2026 are the early signal.</div>
-      <div class="card-meta">Projected · 120% growth / 6 months</div>
+      <div class="t">Self-improvement: about 2027</div>
+      <p>AI improving its own code and research; growth assumed to jump from 20% to 120% per six months. OpenAI reported an "automated research intern" in September 2026.</p>
+      <div class="m">Sage projection · 120% per six months</div>
     </div>
-
     <div class="card orange">
-      <div class="card-icon">⚛️</div>
-      <div class="card-title">Quantum Acceleration — ~2028–29</div>
-      <div class="card-desc">Practical quantum computing available to AI systems. Growth rate jumps to 350% per 6-month period. Combined with self-improvement, capabilities become effectively incomprehensible.</div>
-      <div class="card-meta">Projected · 350% growth / 6 months</div>
+      <div class="t">Quantum acceleration: about 2028–29</div>
+      <p>Practical quantum computing assumed to lift growth to 350% per six months. As of late 2026, broad quantum speed-ups for AI training are still several hardware generations away.</p>
+      <div class="m">Sage projection · 350% per six months</div>
     </div>
-
   </div>
 
 </main>
 
 <footer>
-  <p>AI Coder Evolution &nbsp;·&nbsp; <a href="https://github.com/tombrau/ai-coder-evolution">github.com/tombrau/ai-coder-evolution</a> &nbsp;·&nbsp; March 2026</p>
-  <p style="margin-top:0.4rem; opacity:0.5;">Started with ELIZA (1966) · Still going &nbsp;·&nbsp; Sage (2025) · Arc (2026)</p>
+  <p>AI Coder Evolution · <a href="https://github.com/tombrau/ai-coder-evolution">github.com/tombrau/ai-coder-evolution</a> · Updated November 2026</p>
+  <p>Started with ELIZA (1966) · Still going · Sage (2025) · Arc (2026)</p>
 </footer>
 
 </body>

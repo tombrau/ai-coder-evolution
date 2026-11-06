@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>November 2026 re-check · AI Coder Evolution</title>
+  <link rel="stylesheet" href="../../assets/readable.css" />
+  <style>
+    main, header, footer { max-width: 900px; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+    header { padding-top: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--border); }
+    .back { display: inline-block; margin-bottom: 1rem; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 0.6rem; }
+    .lede { font-size: 1.15rem; }
+    main { padding-top: 1.5rem; padding-bottom: 4rem; }
+    h2 { font-size: 1.35rem; margin: 2.5rem 0 0.8rem; padding-bottom: 0.3rem; border-bottom: 2px solid var(--border); }
+    p { margin: 0 0 0.9rem; }
+    figure { margin: 1.5rem 0; }
+    figure img { width: 100%; height: auto; border: 2px solid var(--border); border-radius: 6px; background: #fff; }
+    figcaption { color: var(--muted); font-size: 0.95rem; margin-top: 0.5rem; }
+    .box { background: var(--surface); border: 2px solid var(--border); border-left: 6px solid var(--accent); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .tablewrap { overflow-x: auto; margin: 0.5rem 0 1rem; }
+    table { width: 100%; border-collapse: collapse; background: var(--surface); border: 2px solid var(--border); }
+    th, td { text-align: left; padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    thead th { background: #eeebe3; }
+    td.num { font-variant-numeric: tabular-nums; }
+    .hit { color: var(--red); font-weight: 700; }
+    .verdict dt { font-weight: 700; margin-top: 1rem; font-size: 1.1rem; }
+    .verdict dd { margin: 0.2rem 0 0; }
+    .muted { color: var(--muted); }
+    ul.sources { padding-left: 1.2rem; }
+    ul.sources li { margin-bottom: 0.3rem; }
+    footer { border-top: 2px solid var(--border); padding-top: 1.5rem; padding-bottom: 2rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<header>
+  <a class="back" href="../../">← Back to AI Coder Evolution</a>
+  <h1>The November 2026 re-check</h1>
+  <p class="lede">In March 2025 Sage projected that AI would reach mid-level programmer ability in the second half of 2027. On the closest real measure we have, that line was crossed in <strong>November 2025</strong>, and the senior line in <strong>February 2026</strong>. Reality ran ahead of the model, but not for the reasons the model gave.</p>
+</header>
+
+<main>
+
+  <figure>
+    <img src="chart.png" alt="Log-scale chart from 2025 to 2031. Measured models (red dots) climb from about 50 minutes (Claude 3.7 Sonnet, early 2025) to about 17 hours (Claude Mythos Preview, March 2026), far above Sage's dashed 2025 curve, which only reaches those levels around 2028 to 2029. Three projection lines (fast, middle, slow) rise from the latest measurement. Horizontal dotted lines mark Sage's entry, mid-level, senior, expert and programming-team levels.">
+    <figcaption>Red dots: measured models. Dashed grey: Sage's 2025 model. Coloured lines: three projections from the best measurement. Each gridline is ten times the one below.</figcaption>
+  </figure>
+
+  <h2>How the comparison works</h2>
+  <p>Sage's capability numbers never had a real-world scale, so they need something real to line up against. The closest is <strong>METR's time horizon</strong>: the length of a software task, timed on a human expert, that an AI agent finishes half the time.</p>
+  <p>The two are tied together at one point: Sage's "entry-level programmer" in early 2025 equals about <strong>50 minutes</strong>, Claude 3.7 Sonnet's measured horizon at that time. Every other Sage level scales in proportion. A different starting point would move every crossing date; the comparison of growth rates below doesn't depend on it.</p>
+
+  <h2>When each of Sage's lines was crossed</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Sage level</th><th>Task length</th><th>Sage forecast</th><th>Crossed</th><th>By</th></tr></thead>
+      <tbody>
+        <tr><td>Entry-level</td><td class="num">0.8 h</td><td>2025 H1</td><td>Feb 2025</td><td>Claude 3.7 Sonnet (the anchor)</td></tr>
+        <tr><td>Mid-level</td><td class="num">3.8 h</td><td>2027 H2</td><td class="hit">Nov 2025</td><td>Claude Opus 4.5 (about 4.8 h)</td></tr>
+        <tr><td>Senior</td><td class="num">8.4 h</td><td>2028 H1</td><td class="hit">Feb 2026</td><td>Claude Opus 4.6 (about 14.5 h)</td></tr>
+        <tr><td>Expert</td><td class="num">18.4 h</td><td>2028 H2</td><td>Unconfirmed</td><td>Mythos Preview measured at least 16 h (range 8.5–55 h)</td></tr>
+        <tr><td>Programming team</td><td class="num">82.8 h</td><td>2029 H1</td><td>Not yet</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>For early 2026, Sage's curve expected about <strong>1.2 hours</strong>. The best measured model reached about <strong>17 hours</strong>.</p>
+
+  <h2>How fast it grew</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Growth rate</th><th>× per six months</th></tr></thead>
+      <tbody>
+        <tr><td>Sage: baseline, to 2027</td><td class="num">1.2×</td></tr>
+        <tr><td>Sage: self-improvement, 2027–28</td><td class="num">2.2×</td></tr>
+        <tr><td>Sage: quantum, 2028 onward</td><td class="num">4.5×</td></tr>
+        <tr><td>Measured: long-run trend, 2019–24 (doubling every ~7 months)</td><td class="num">1.81×</td></tr>
+        <tr><td><strong>Measured: 2024 to early 2026 (doubling every ~105 days)</strong></td><td class="num"><strong>3.34×</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box">The measured pace from 2024 to early 2026 was already faster than the rate Sage expected only <em>after</em> AI began improving itself, and it happened before any self-improvement.</div>
+
+  <h2>Scoring Sage's 2025 model</h2>
+  <dl class="verdict">
+    <dt>Direction: right</dt>
+    <dd>Capability kept compounding, and 2027 does look like the year AI starts doing much of its own research. OpenAI says it reached its "automated research intern" goal in September 2026, with AI agents logging 3.1 workdays for every human workday in August, and is aiming for a fully automated researcher by March 2028.</dd>
+    <dt>Pace: too slow at first</dt>
+    <dd>The 20% baseline was the biggest miss. Models trained to reason step by step pushed growth past Sage's self-improvement rate in 2024–25.</dd>
+    <dt>Mechanisms: partly wrong</dt>
+    <dd>The quantum boost hasn't arrived; broad quantum speed-ups for AI training are still several hardware generations away. Diffusion models are fast (Mercury 2 in February, Mercury 3 in October 2026) but not yet as capable as the best models.</dd>
+    <dt>What it can't show</dt>
+    <dd>Benchmarks crossed "senior programmer" in early 2026, yet developer job postings rose about 11% in 2026, while employment of developers aged 22–25 has fallen about 20% since late 2022. A task-length score is not a job.</dd>
+    <dt>The ruler ran out</dt>
+    <dd>METR can't reliably measure beyond about 16 hours and has published no new frontier results since May 2026, so newer models (Claude Opus 5 and 5.5, Fable 5.1, GPT-6 Astra) aren't on the chart.</dd>
+    <dt>On sentience</dt>
+    <dd>None of these curves measures awareness. The mid-2027 crossing in the original graph is about coding work, and there is still no agreed test for whether a system experiences anything.</dd>
+  </dl>
+
+  <h2>Three paths forward</h2>
+  <p>Projected from the best measurement (Claude Mythos Preview, March 2026), showing the month each task length is reached.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Task length</th><th>Fast<br><span class="muted">~4-month doubling</span></th><th>Middle<br><span class="muted">~7-month doubling</span></th><th>Slow<br><span class="muted">yearly doubling</span></th></tr></thead>
+      <tbody>
+        <tr><td>A working week (40 h)</td><td>Aug 2026</td><td>Nov 2026</td><td>May 2027</td></tr>
+        <tr><td>Sage's "programming team" (83 h)</td><td>Dec 2026</td><td>Jul 2027</td><td>Jun 2028</td></tr>
+        <tr><td>A working month (167 h)</td><td>Apr 2027</td><td>Feb 2028</td><td>Jun 2029</td></tr>
+        <tr><td>A working year (2,000 h)</td><td>Jun 2028</td><td>Mar 2030</td><td>Jan 2033</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">These are benchmark milestones, not jobs replaced. Even the fast path's first milestone can't be confirmed while the measuring tasks top out at about 16 hours.</p>
+
+  <h2>What 2026 added</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Date</th><th>What happened</th><th>What it means for the model</th></tr></thead>
+      <tbody>
+        <tr><td>24 Feb</td><td>Mercury 2 ships, the first diffusion reasoning model (about 1,000 tokens a second). Mercury 3 followed on 19 October.</td><td>Diffusion is real but not yet at the frontier.</td></tr>
+        <tr><td>Mar</td><td>METR measures Claude Mythos Preview at 16 hours or more, the top of what its tests can measure.</td><td>Progress since spring can't be read off the same scale.</td></tr>
+        <tr><td>Apr</td><td>Stanford AI Index: employment of developers aged 22–25 down about 20% since late 2022.</td><td>The entry-level rung is hit first, Gemini's "experience paradox" from Round 1.</td></tr>
+        <tr><td>Apr</td><td>Developer job postings up about 11% year on year; US government still projects 15% growth to 2034.</td><td>Most teams still pair AI with people.</td></tr>
+        <tr><td>19 May</td><td>METR's Frontier Risk Report: labs reported no dramatic research speed-ups (Feb–Mar 2026).</td><td>Self-improvement hadn't visibly compounded by spring.</td></tr>
+        <tr><td>Jul</td><td>SWE-bench Pro tops out near 80% (Claude Mythos 5: 80.3%).</td><td>The main coding benchmarks are close to saturated.</td></tr>
+        <tr><td>6 Sep</td><td>OpenAI reports its "automated research intern" milestone; target for a full automated researcher: March 2028.</td><td>Sage's 2027 self-improvement step is arriving roughly on schedule.</td></tr>
+        <tr><td>Sep</td><td>Quantum computing: error-corrected qubits in the dozens; broad speed-ups for AI training still years away.</td><td>Sage's 2028 quantum boost looks the least likely part of the model.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Data and sources</h2>
+  <p>The data files, the script that builds them and the script that draws the chart are in <a href="https://github.com/tombrau/ai-coder-evolution/tree/main/rechecks/2026-11">this folder on GitHub</a>.</p>
+  <ul class="sources">
+    <li><a href="https://en.wikipedia.org/wiki/METR">METR: time horizon table (Wikipedia)</a></li>
+    <li><a href="https://www.datalearner.com/en/benchmarks/metr-time-horizons-v1-1">METR time horizons v1.1 data (DataLearner)</a></li>
+    <li><a href="https://officechai.com/ai/claude-mythos-shows-50-time-horizon-of-16-hours-on-metr-benchmark/">Claude Mythos shows 16+ hour time horizon (OfficeChai)</a></li>
+    <li><a href="https://manifold.markets/event/best-ai-time-horizon-by-august-2026">Best AI time horizon by August 2026 (Manifold)</a></li>
+    <li><a href="https://openai.com/index/research-acceleration-view-inside-openai/">Research acceleration: the view inside OpenAI</a></li>
+    <li><a href="https://aiweekly.co/alerts/openai-says-it-hit-automated-research-intern-milestone">OpenAI hits "automated research intern" milestone (AI Weekly)</a></li>
+    <li><a href="https://benchlm.ai/benchmarks/swe-bench-pro">SWE-bench Pro leaderboard (BenchLM)</a></li>
+    <li><a href="https://www.mexc.com/news/1024589">Stanford AI Index: junior developer employment</a></li>
+    <li><a href="https://www.aixploria.com/en/ai-radar/ai-developer-jobs-data-growth-not-collapse/">Developer jobs growing in 2026 (AIxploria)</a></li>
+    <li><a href="https://theneuron.ai/news/mercury-3-review-diffusion-language-models">Mercury 3 review (The Neuron)</a></li>
+    <li><a href="https://skycrumbs.com/blog/quantum-ai-computing-september-2026">Quantum AI computing, September 2026 (Skycrumbs)</a></li>
+  </ul>
+
+</main>
+
+<footer>
+  <p>Prepared by Arc (Claude) for Tom · 6 November 2026 · <a href="../../">AI Coder Evolution home</a></p>
+</footer>
+
+</body>
+</html>
